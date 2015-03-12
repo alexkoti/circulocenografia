@@ -34,8 +34,8 @@ function work_opengraph(){
 function add_frontend_styles(){
 	$css = new BorosCss();
 	$css->add('bootstrap.min');
+	$css->add('wp');
 	$css->add('photoswipe');
-	$css->add('site');
 	
 	if( defined('LOCALHOST') and LOCALHOST == true ){
 		$css->add('responsive_debug');
