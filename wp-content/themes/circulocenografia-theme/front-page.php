@@ -10,10 +10,23 @@
  */
 
 get_header(); ?>
-		
-		<div id="column">
-			<?php boros_breadcrumb(); ?>
-			
+
+<div class="container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-md-4 col-sm-4 col-xs-6 sidebar-offcanvas">
+			<?php
+			$args = array(
+				'menu'         => 'Sidebar',
+				'container'    => 'nav',
+				'container_id' => 'offcanvas',
+				'menu_class'   => 'menu-offcanvas',
+				'echo'         => false,
+			);
+			$menu_sidebar = wp_nav_menu($args);
+			echo $menu_sidebar;
+			?>
+		</div>
+		<div class="col-md-8 col-sm-8 col-xs-12">
 			<?php
 			if (have_posts()){
 				custom_content_nav( 'nav_above' );
@@ -23,36 +36,9 @@ get_header(); ?>
 				}
 			}
 			?>
-			
-			<section>
-				<h5>Lista de posts chamada por <code>WP_Query()</code>, dentro de <code>front-page.php</code>:</h5>
-				<dl>
-				<?php
-				$query = array(
-					'post_type' => array('post', 'page'),
-					'post_status' => 'publish',
-					'post_parent' => 0,
-					'orderby' => 'menu_order',
-					'order' => 'DESC',
-				);
-				$custom_posts = new WP_Query();
-				$custom_posts->query($query);
-				if( $custom_posts->posts ){
-					foreach($custom_posts->posts as $post){
-						setup_postdata($post);
-						?>
-						<dt><?php the_title(); ?></dt>
-						<dd><?php the_excerpt(); ?></dd>
-						<?php
-					}
-				}
-				wp_reset_query();
-				?>
-				</dl>
-			</section>
-			
-		</div><!-- .column -->
-		
-		<?php get_sidebar(); ?>
-		
+		</div>
+	</div>
+</div>
+
+
 <?php get_footer() ?>

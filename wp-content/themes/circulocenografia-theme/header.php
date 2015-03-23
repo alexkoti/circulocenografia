@@ -10,6 +10,7 @@
 <meta name="description" content="<?php bloginfo('description'); ?>" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="icon" type="image/png" href="<?php echo CSS_IMG; ?>/favicon_mam.png" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <link rel="home" href="<?php site_url('/'); ?>" />
 <title><?php
@@ -36,42 +37,16 @@ wp_head();
 
 <body <?php body_class(); ?>>
 
-<?php do_action( 'header_debug' ); ?>
-
-<div id="site">
-	<header id="header">
-		<div id="header_info">
-			<a href="<?php echo home_url( '/' ); ?>" id="logo_home" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-				<?php bloginfo( 'name' ); ?>
-			</a>
-			<?php get_search_form(); ?>
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="offcanvas">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
 		</div>
-		
-		<?php wp_nav_menu( array( 'theme_location' => 'menu_principal', 'container' => 'nav', 'container_class' => 'menu_principal' ) ); ?>
-	</header><!-- .header -->
-	
-	<div id="content">
-		<div>
-			<?php
-			/**
-			$args = array(
-				'type' => 'search',
-				'search' => '#Sharecamp',
-				'number' => 10,
-				'avatars' => false,
-				'link_avatars' => false,
-				'cache' => 5,
-				'cache_unit' => 1,
-				'title' => 'teste %USER%',
-			);
-			boros_twitter( $args );
-			/**/
-			//foobar();
-			//test_subpage_tab_function();
-			//
-			//$end = opt_option('site_street_address', '<div>Endereço: %s</div>', false);
-			//echo $end;
-			//apagar();
-			//test_1();
-			?>
-		</div>
+	</div>
+</nav>
