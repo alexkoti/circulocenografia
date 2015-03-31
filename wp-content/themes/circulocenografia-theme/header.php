@@ -37,7 +37,7 @@ wp_head();
 
 <body <?php body_class(); ?>>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top" id="menu-top">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="offcanvas">
@@ -46,7 +46,7 @@ wp_head();
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
+			<a id="logo-header" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
 		</div>
 	</div>
 </nav>

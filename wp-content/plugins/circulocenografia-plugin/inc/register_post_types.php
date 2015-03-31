@@ -24,12 +24,12 @@
  * 
  * 
  */
-//add_action( 'init', 'register_post_types' );
+add_action( 'init', 'register_post_types' );
 function register_post_types(){
 	/**
 	 * Noticias
 	 * 
-	 */
+	 *
 	$labels = array(
 		'name' => 'Notícias',
 		'singular_name' => 'Notícia',
@@ -94,28 +94,29 @@ function register_post_types(){
 		)
 	);
 	new BorosPostTypeColumns( $columns_config );
+	/**/
 	
 	/**
-	 * ARTIGOS
+	 * PORTFOLIO
 	 * 
 	 */
 	$labels = array(
-		'name' => 'Artigos',
-		'singular_name' => 'Artigo',
-		'menu_name' => 'Artigos',
-		'add_new' => 'Novo Artigo',
-		'add_new_item' => 'Adicionar Artigo',
-		'edit_item' => 'Editar Artigo',
-		'new_item' => 'Novo Artigo',
-		'view_item' => 'Ver Artigo',
-		'search_items' => 'Buscar Artigo',
+		'name' => 'Portfolio',
+		'singular_name' => 'Portfolio',
+		'menu_name' => 'Portfolio',
+		'add_new' => 'Novo Item do Portfolio',
+		'add_new_item' => 'Adicionar Item do Portfolio',
+		'edit_item' => 'Editar Item do Portfolio',
+		'new_item' => 'Novo Item do Portfolio',
+		'view_item' => 'Ver Item do Portfolio',
+		'search_items' => 'Buscar Item do Portfolio',
 		'not_found' =>  'Nenhum encontrado',
 		'not_found_in_trash' => 'Nenhum encontrado na lixeira',
 		'parent_item_colon' => '',
 	);
 	$args = array(
 		'labels' => $labels,
-		'description' => 'Artigos gerais',
+		'description' => 'Portfolio',
 		'public' => true,
 			'publicly_queryable' => true,
 			'exclude_from_search' => false,
@@ -124,66 +125,26 @@ function register_post_types(){
 		'query_var' => true,
 		'rewrite' => true,
 		'capability_type' => 'post',
-		'capabilities' => array( 
-			'edit_post'              => 'edit_post',
-			'read_post'              => 'read_post',
-			'delete_post'            => 'delete_post',
-			'edit_posts'             => 'edit_posts',
-			'edit_others_posts'      => 'edit_others_posts',
-			'publish_posts'          => 'publish_posts',
-			'read_private_posts'     => 'read_private_posts',
-			'delete_posts'           => 'delete_posts',
-			'delete_private_posts'   => 'delete_private_posts',
-			'delete_published_posts' => 'delete_published_posts',
-			'delete_others_posts'    => 'delete_others_posts',
-			'edit_private_posts'     => 'edit_private_posts',
-			'edit_published_posts'   => 'edit_published_posts',
-			'create_posts'           => 'edit_posts',
-			'read'                   => 'read',
-		), 
 		'hierarchical' => true,
 		'has_archive' => 'artigos',
-		'menu_icon' => 'dashicons-format-aside',
+		'menu_icon' => 'dashicons-art',
 		//'show_in_menu' => 'edit.php?post_type=artigo',
 		'supports' => array(
 			'title',
 			'editor',
 			'thumbnail',
-			'page-attributes',
 		)
 	); 
-	register_post_type( 'artigo' , $args );
+	register_post_type( 'portfolio' , $args );
 	$columns_config = array(
-		'post_type' => 'artigo',
+		'post_type' => 'portfolio',
 		'columns' => array(
 			'cb' => '<input type="checkbox" />',
 			'title' => 'Título',
 			'date' => 'Data',
 		)
 	);
-	new BorosPostTypeColumns( $columns_config );
-	$help_config = array(
-		'post_type' => 'artigo',
-		'list' => array(
-			array(
-				'id' => 'page_edit',
-				'title' => 'Help LIST',
-				'content' => '	<p>Morbi rhoncus massa tellus, at eleifend nunc. Phasellus arcu purus, luctus nec commodo eget, scelerisque tempor sem.</p>
-								<p>Sed nibh velit, rhoncus in tempus vitae, aliquam at metus? Phasellus vel tristique enim? Pellentesque ullamcorper, arcu ac pellentesque congue, sapien arcu viverra elit, a sagittis metus risus eu ligula. Curabitur ut leo et mi tempor porttitor at ut lectus.</p>
-								<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam justo ligula, dignissim eu consequat et, iaculis non dui. Nulla facilisi. Morbi accumsan leo id quam accumsan eleifend. Aliquam elementum, odio quis rhoncus viverra, metus orci sodales turpis, vel facilisis lorem ipsum eu eros. Maecenas eu vehicula ligula.</p>'
-			),
-		),
-		'edit' => array(
-			array(
-				'id' => 'page_edit',
-				'title' => 'Help EDIT',
-				'content' => '	<p>Morbi rhoncus massa tellus, at eleifend nunc. Phasellus arcu purus, luctus nec commodo eget, scelerisque tempor sem.</p>
-								<p>Sed nibh velit, rhoncus in tempus vitae, aliquam at metus? Phasellus vel tristique enim? Pellentesque ullamcorper, arcu ac pellentesque congue, sapien arcu viverra elit, a sagittis metus risus eu ligula. Curabitur ut leo et mi tempor porttitor at ut lectus.</p>
-								<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam justo ligula, dignissim eu consequat et, iaculis non dui. Nulla facilisi. Morbi accumsan leo id quam accumsan eleifend. Aliquam elementum, odio quis rhoncus viverra, metus orci sodales turpis, vel facilisis lorem ipsum eu eros. Maecenas eu vehicula ligula.</p>'
-			),
-		),
-	);
-	new BorosPostTypeScreenHelp( $help_config );
+	
 }
 
 /**

@@ -42,7 +42,7 @@ function my_admin_pages(){
 function my_admin_pages_config(){
 	
 	$admin_pages = array(
-		'edit.php' => array(
+		'edit.php?post_type=portfolio' => array(
 			'type' => 'core',
 			'subpages' => array(
 				'category_order' => array(

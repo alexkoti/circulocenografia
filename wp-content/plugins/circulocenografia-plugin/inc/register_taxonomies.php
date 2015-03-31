@@ -13,7 +13,7 @@
  * 
  * 
  */
-//add_action('init', 'register_taxonomies');
+add_action('init', 'register_taxonomies');
 function register_taxonomies(){
 	/**
 	MODELOS DE LABELS ================================
@@ -50,28 +50,28 @@ function register_taxonomies(){
 
 
 	/**
-	 * REGIÕES
+	 * CATEGORIAS DE PORTFOLIO
 	 * 
 	 */
 	$labels = array(
-		'name' => 'Regiões',
-		'singular_name' => 'Região',
-		'search_items' => 'Buscar Região',
-		'popular_items' => 'Regiões Populares',
-		'all_items' => 'Todas as Regiões',
-		'edit_item' => 'Editar Região',
-		'update_item' => 'Atualizar Região',
-		'add_new_item' => 'Adicionar nova Região',
-		'new_item_name' => 'Nome da nova Região',
+		'name' => 'Categorias de Portfolio',
+		'singular_name' => 'Categoria de Portfolio',
+		'search_items' => 'Buscar Categorias de Portfolio',
+		'popular_items' => 'Categorias de Portfolio Populares',
+		'all_items' => 'Todas as Categorias de Portfolio',
+		'edit_item' => 'Editar Categoria de Portfolio',
+		'update_item' => 'Atualizar Categoria de Portfolio',
+		'add_new_item' => 'Adicionar nova Categoria de Portfolio',
+		'new_item_name' => 'Nome da nova Categoria de Portfolio',
 		// >>> hierarchical labels
-		'parent_item' => 'Região Pai',
-		'parent_item_colon' => 'Região Pai:',
+		'parent_item' => 'Categoria de Portfolio Mãe',
+		'parent_item_colon' => 'Categoria de Portfolio Mãe:',
 	); 
-	register_taxonomy('regiao', array('post', 'noticia'), array(
+	register_taxonomy('portfolio_category', array('portfolio'), array(
 		'hierarchical' => true,
 		'labels' => $labels,
 		'public' => true,
-		'query_var' => 'regiao',
+		'query_var' => 'categoria_portfolio',
 		'capabilities' => array(
 			'manage_terms' => 'manage_categories',
 			'edit_terms'   => 'manage_categories',
@@ -79,7 +79,7 @@ function register_taxonomies(){
 			'assign_terms' => 'edit_posts',
 		),
 		'rewrite' => array(
-			'slug' => 'regiao',
+			'slug' => 'categoria-portfolio',
 			'hierarchical' => true
 		),
 	));

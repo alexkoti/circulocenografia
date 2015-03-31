@@ -14,43 +14,32 @@ jQuery(document).ready(function($){
 	
 	
 	/**
-	 * CUSTOM MODERNIZR
-	 * Workarounds para IEs
-	 * 
+	 * MENU OFFCANVAS
 	 * 
 	 */
-	// Aplicar index para nth-child
-	$('ol').each(function(){
-		$(this).find('li').each(function(){
-			var index = $(this).index() + 1;
-			$(this).addClass('item_' + index);
-		});
+	$('[data-toggle="offcanvas"]').click(function () {
+		$('.row-offcanvas').toggleClass('active');
 	});
-	function supportsAttr( element, attribute ){
-		var test = document.createElement(element);
-		if (attribute in test) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
-	// RESETAR INPUTS DE TEXTO IE 9-
-	// Pega o valor padrão e remove em focus() e retoma em blur(), em caso de valor não preenchido
-	if( !supportsAttr('input', 'placeholder') ){
-		$( 'input[placeholder], textarea[placeholder]' ).each(function(){
-			if( $(this).val().length === 0 )
-				$(this).val( $(this).attr('placeholder') );
-		}).blur(function(){
-			if( $(this).val().length === 0 ){
-				$(this).val( $(this).attr('placeholder') );
-			}
-		}).focus(function(){
-			if( $(this).val() == $(this).attr('placeholder') ){
-				$(this).val('');
-			}
-		});
-	}
+	
+	
+	/**
+	 * SUBMENU CATEGORIAS PORTFOLIO
+	 * 
+	 */
+	$('#portfolio-submenu li span').on('click', function(){
+		var target = $(this).attr('data-target');
+		var active = $('#portfolio-box .active');
+		if( active.attr('id') != target ){
+			active.fadeOut(400, function(){
+				$('#portfolio-box .portfolio-category').removeClass('active');
+				$('#'+target).fadeIn(400, function(){
+					$(this).addClass('active');
+				});
+			});
+		}
+		$('.row-offcanvas').removeClass('active');
+	});
 	
 	
 	

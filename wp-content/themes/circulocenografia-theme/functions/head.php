@@ -41,7 +41,6 @@ function work_opengraph(){
 function add_frontend_styles(){
 	$css = new BorosCss();
 	$css->add('bootstrap.min');
-	//$css->add('jasny-bootstrap.min');
 	$css->add('wp');
 	$css->add('circulo-cenografia');
 	
@@ -94,7 +93,6 @@ function add_frontend_scripts(){
 	$js = new BorosJs();
 	$js->jquery('jquery.validate.min', 'libs');
 	$js->jquery('bootstrap.min', 'libs');
-	//$js->jquery('jasny-bootstrap.min', 'libs');
 	$js->jquery('functions');
 	//$js->add('modernizr', 'libs', false, false);
 	//$js->add('html5', 'libs', false, false);

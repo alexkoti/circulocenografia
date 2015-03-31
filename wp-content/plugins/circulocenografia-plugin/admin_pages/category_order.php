@@ -15,11 +15,11 @@ function category_order(){
 			array(
 				'name' => 'category_order',
 				'type' => 'content_order',
-				'label' => 'Ordem das categorias:',
-				'label_helper' => '<br /><a href="' . admin_url('edit-tags.php?taxonomy=category') . '">clique aqui para ir na tela de editar ou adicionar categorias</a>',
+				'label' => 'Ordem das Categorias do Portfolio:',
+				'label_helper' => '<br /><a href="' . admin_url('edit-tags.php?taxonomy=portfolio_category') . '">clique aqui para ir na tela de editar ou adicionar categorias</a>',
 				'options' => array(
 					'taxonomy' => array(
-						'taxonomy_name' => 'category',
+						'taxonomy_name' => 'portfolio_category',
 						'hide_empty' => false,
 						'orderby' => 'term_order',
 						'parent' => 0,

@@ -7,7 +7,7 @@
  * Verficar se existe o post-thumbnail: has_post_thumbnail() return bool
  */
 // adicionar suporte
-add_theme_support( 'post-thumbnails', array( 'post', 'page' ) );
+add_theme_support( 'post-thumbnails', array( 'post', 'page', 'portfolio' ) );
 
 // tamanho do post-thumb W, H, crop
 set_post_thumbnail_size( 300, 300, true ); //slider home
@@ -23,14 +23,14 @@ if ( ! isset( $content_width ) ) $content_width = get_option('embed_size_w');
  * Adicionar novos tamanhos de imagens
  * @version 2.9+
  */
-add_image_size( 'tamanho_a', 400, 400, false );
-add_image_size( 'tamanho_b', 800, 800, false );
+//add_image_size( 'tamanho_a', 400, 400, false );
+//add_image_size( 'tamanho_b', 800, 800, false );
 //add_image_size( 'tamanho_a', 1000, 1000, false );
 
 add_filter( 'image_size_names_choose', 'image_sizes_names' );
 function image_sizes_names( $sizes ){
-	$sizes['tamanho_a'] = 'Tamanho A';
-	$sizes['tamanho_b'] = 'Tamanho B';
+	//$sizes['tamanho_a'] = 'Tamanho A';
+	//$sizes['tamanho_b'] = 'Tamanho B';
 	$sizes['post-thumbnail'] = 'Post Thumbnail';
 	return $sizes;
 }
@@ -78,7 +78,7 @@ function lock_media_sizes(){
  * 
  * @todo Verificar o método antigo de aplicar os filtros de the_content para ativar o oembed
  * 
- */
+ *
 function responsive_video( $url, $echo = true ){
 	if( filter_var($url, FILTER_VALIDATE_URL) === FALSE){
 		$url = get_option('ao_vivo_video');
@@ -99,6 +99,7 @@ function responsive_video( $url, $echo = true ){
 	}
 	echo $video_tag;
 }
+/**/
 
 
 /**

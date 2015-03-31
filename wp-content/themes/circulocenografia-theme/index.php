@@ -8,44 +8,54 @@
  */
 
 get_header(); ?>
-		
-		<div id="column">
-			<?php boros_breadcrumb(); ?>
-			
+
+<div class="container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-md-4 col-sm-4 col-xs-6 sidebar-offcanvas" id="offcanvas-sidebar">
 			<?php
-			/**
-			 * Caso tenha posts para exibir
-			 * 
-			 */
-			if (have_posts()){
-				custom_content_nav( 'nav_above' );
-				while (have_posts()){
-					the_post();
-					get_template_part( 'content' );
-				}
-				custom_content_nav( 'nav_below' );
-			}
-			/**
-			 * Sem resultados
-			 * IMPORTANTE: isso não é exatamente a mesma coisa que o 404 not found(este possui template próprio), é aplicado à uma requisição válida porém sem resultados
-			 * conforme o contexto, por exemplo listagem de posts na página 999, onde não existem mais posts para exibir.
-			 */
-			 else {
-				?>
-				<article class="post hentry no-results not-found">
-					<header class="entry_header">
-						<h2>Sem resultados</h2>
-					</header>
-					<div class="entry_content">
-						Não foram encontrados resultados para essa requisição :(
-					</div>
-				</article>
-				<?php
-			 }
+			//$args = array(
+			//	'menu'         => 'Sidebar',
+			//	'container'    => 'nav',
+			//	'container_id' => 'offcanvas',
+			//	'menu_class'   => 'menu-offcanvas',
+			//	'echo'         => false,
+			//);
+			//$menu_sidebar = wp_nav_menu($args);
+			//echo $menu_sidebar;
 			?>
-			
-		</div><!-- .column -->
-		
-		<?php get_sidebar(); ?>
-		
+			<nav id="offcanvas" class="menu-sidebar-container">
+				<ul id="menu-sidebar" class="menu-offcanvas">
+					<?php
+					formatted_page_link(array('page_name' => 'Início', 'list' => true));
+					?>
+					<li>
+						<span>Portfolio</span>
+						<ul>
+							<?php
+							$ports = get_terms('portfolio_category', array('hide_empty' => false));
+							foreach( $ports as $cat ){
+								//pre($cat, 'cat', false);
+								formatted_term_link(array('list' => true), $cat);
+							}
+							?>
+						</ul>
+					</li>
+			</ul></nav>
+		</div>
+		<div class="col-md-8 col-sm-8 col-xs-12" id="offcanvas-content">
+			<img src="http://placehold.it/780x400" class="img-responsive" alt="" />
+			<?php
+			//if (have_posts()){
+			//	custom_content_nav( 'nav_above' );
+			//	while (have_posts()){
+			//		the_post();
+			//		get_template_part( 'content', 'page' );
+			//	}
+			//}
+			?>
+		</div>
+	</div>
+</div>
+
+
 <?php get_footer() ?>

@@ -4,10 +4,16 @@
  */
 
 get_header(); ?>
-		
-		<div id="column">
-			<?php boros_breadcrumb(); ?>
+
+
+<div class="container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-md-4 col-sm-4 col-xs-6 sidebar-offcanvas" id="offcanvas-sidebar">
+			<?php get_template_part('menu-lateral'); ?>
 			
+			<?php get_sidebar(); ?>
+		</div>
+		<div class="col-md-8 col-sm-8 col-xs-12" id="offcanvas-content">
 			<?php
 			if (have_posts()){
 				custom_content_nav( 'nav_above' );
@@ -17,9 +23,7 @@ get_header(); ?>
 				}
 			}
 			?>
-			
-		</div><!-- .column -->
-		
-		<?php get_sidebar(); ?>
-		
+		</div>
+	</div>
+</div>
 <?php get_footer() ?>
