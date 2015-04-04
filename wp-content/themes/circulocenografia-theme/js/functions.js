@@ -47,7 +47,6 @@ jQuery(document).ready(function($){
 			});
 		}
 		if( $('#portfolio-submenu .portfolio-category-items:visible').length ){
-			console.log(1);
 			var ul = link.closest('.portfolio-category-menu-item').find('.portfolio-category-items');
 			if( ul.is(':visible') ){
 				return;
@@ -61,7 +60,6 @@ jQuery(document).ready(function($){
 			});
 		}
 		else{
-			console.log(2);
 			link.closest('.portfolio-category-menu-item').find('.portfolio-category-items').slideDown();
 		}
 		// esconder o menu após o click apenas se for a página porfolio

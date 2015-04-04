@@ -51,7 +51,7 @@
 												echo "<li id='portfolio-category-item-{$post->ID}' class='portfolio-category-item'><span class='active'>{$title}</span></li>";
 											}
 											else{
-												echo "<li id='portfolio-category-item-{$post->ID}' class='portfolio-category-item'><a href='{$link}'{$active}>{$title}</a></li>";
+												echo "<li id='portfolio-category-item-{$post->ID}' class='portfolio-category-item'><a href='{$link}'>{$title}</a></li>";
 											}
 										}
 										echo '</ul>';

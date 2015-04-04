@@ -10,10 +10,10 @@ get_header(); ?>
 
 <div class="container">
 	<div class="row row-offcanvas row-offcanvas-left">
-		<div class="col-md-4 col-sm-4 col-xs-6 sidebar-offcanvas" id="offcanvas-sidebar">
+		<div class="col-md-3 col-sm-4 col-xs-6 sidebar-offcanvas" id="offcanvas-sidebar">
 			<?php get_template_part('menu-lateral'); ?>
 		</div>
-		<div class="col-md-8 col-sm-8 col-xs-12" id="offcanvas-content">
+		<div class="col-md-9 col-sm-8 col-xs-12" id="offcanvas-content">
 			<img src="http://placehold.it/780x400" class="img-responsive" alt="" />
 			
 			<?php
