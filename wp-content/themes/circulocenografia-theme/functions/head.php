@@ -48,10 +48,10 @@ function add_frontend_styles(){
 		$css->add('responsive_debug');
 	}
 	
-	/** MODELO absolute / google fonts
+	/* MODELO absolute / google fonts */
 	$args = array(
-		'name' => 'fonts',
-		'src' => 'http://fonts.googleapis.com/css?family=Dosis:400,700|Amatic+SC:400,700',
+		'name' => 'font-raleway',
+		'src' => 'http://fonts.googleapis.com/css?family=Raleway:500,700,400',
 		'parent' => false,
 		'version' => '1',
 		'media' => 'screen',

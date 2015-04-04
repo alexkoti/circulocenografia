@@ -18,7 +18,12 @@ jQuery(document).ready(function($){
 	 * 
 	 */
 	$('[data-toggle="offcanvas"]').click(function () {
-		$('.row-offcanvas').toggleClass('active');
+		if( $('.row-offcanvas').is('.active') ){
+			$('.row-offcanvas, html, body').removeClass('active');
+		}
+		else{
+			$('.row-offcanvas, html, body').addClass('active');
+		}
 	});
 	
 	
@@ -27,9 +32,12 @@ jQuery(document).ready(function($){
 	 * SUBMENU CATEGORIAS PORTFOLIO
 	 * 
 	 */
-	$('#portfolio-submenu li span').on('click', function(){
+	$('#portfolio-submenu .category-link, #portfolio-categories-list .portfolio-item-link').on('click', function(){
+		var link = $(this);
 		var target = $(this).attr('data-target');
 		var active = $('#portfolio-box .active');
+		//console.log(active);
+		//console.log(target);
 		if( active.attr('id') != target ){
 			active.fadeOut(400, function(){
 				$('#portfolio-box .portfolio-category').removeClass('active');
@@ -38,7 +46,26 @@ jQuery(document).ready(function($){
 				});
 			});
 		}
-		$('.row-offcanvas').removeClass('active');
+		if( $('#portfolio-submenu .portfolio-category-items:visible').length ){
+			var ul = link.closest('.portfolio-category-menu-item').find('.portfolio-category-items');
+			if( ul.is(':visible') ){
+				return;
+			}
+			$('#portfolio-submenu .portfolio-category-items').slideUp({
+				duration : 400, 
+				queue : false,
+				complete : function(){
+					link.parent('li').find('.portfolio-category-items').slideDown();
+				}
+			});
+		}
+		else{
+			link.parent('li').find('.portfolio-category-items').slideDown();
+		}
+		// esconder o menu após o click apenas se for a página porfolio
+		if( $('body').is('.item-name-portfolio') ){
+			$('.row-offcanvas, html, body').removeClass('active');
+		}
 	});
 	
 	
