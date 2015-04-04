@@ -47,6 +47,7 @@ jQuery(document).ready(function($){
 			});
 		}
 		if( $('#portfolio-submenu .portfolio-category-items:visible').length ){
+			console.log(1);
 			var ul = link.closest('.portfolio-category-menu-item').find('.portfolio-category-items');
 			if( ul.is(':visible') ){
 				return;
@@ -55,12 +56,13 @@ jQuery(document).ready(function($){
 				duration : 400, 
 				queue : false,
 				complete : function(){
-					link.parent('li').find('.portfolio-category-items').slideDown();
+					link.closest('.portfolio-category-menu-item').find('.portfolio-category-items').slideDown();
 				}
 			});
 		}
 		else{
-			link.parent('li').find('.portfolio-category-items').slideDown();
+			console.log(2);
+			link.closest('.portfolio-category-menu-item').find('.portfolio-category-items').slideDown();
 		}
 		// esconder o menu após o click apenas se for a página porfolio
 		if( $('body').is('.item-name-portfolio') ){

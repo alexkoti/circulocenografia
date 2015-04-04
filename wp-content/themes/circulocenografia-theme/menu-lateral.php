@@ -47,7 +47,12 @@
 										foreach( $items->posts as $post ){
 											$title = get_the_title($post->ID);
 											$link = get_permalink($post->ID);
-											echo "<li id='portfolio-category-item-{$post->ID}' class='portfolio-category-item'><a href='{$link}'>{$title}</a></li>";
+											if($portfolio_item->ID == $post->ID){
+												echo "<li id='portfolio-category-item-{$post->ID}' class='portfolio-category-item'><span class='active'>{$title}</span></li>";
+											}
+											else{
+												echo "<li id='portfolio-category-item-{$post->ID}' class='portfolio-category-item'><a href='{$link}'{$active}>{$title}</a></li>";
+											}
 										}
 										echo '</ul>';
 									}

@@ -111,7 +111,8 @@ body {
 	display:block;
 }
 #offcanvas a:hover,
-#offcanvas ul li#portfolio-submenu .category-link:hover {
+#offcanvas ul li#portfolio-submenu .category-link:hover, 
+#offcanvas ul li#portfolio-submenu .portfolio-category-item span.active {
 	color:red;
 	text-decoration:none;
 }
