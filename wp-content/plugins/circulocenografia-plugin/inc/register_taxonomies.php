@@ -105,20 +105,15 @@ function register_categories_to_custom_post_type(){
  * Configurar os termmetas das taxonomias
  * 
  */
-//add_action('admin_init', 'my_add_taxonomy_meta');
+add_action('admin_init', 'my_add_taxonomy_meta');
 function my_add_taxonomy_meta(){
 	$taxonomy_meta = array();
-	$taxonomy_meta['category'] = array(
+	$taxonomy_meta['portfolio_category'] = array(
 		'itens' => array(
 			array(
-				'name' => 'alias_pt',
-				'type' => 'text',
-				'label' => '<img src="'.BOROS_IMG.'/flag_br.png" alt="" /> Nome de exibição no menu:',
-			),
-			array(
-				'name' => 'alias_en',
-				'type' => 'text',
-				'label' => '<img src="'.BOROS_IMG.'/flag_uk.png" alt="" /> Nome de exibição no menu:',
+				'name' => 'category_thumbnail',
+				'type' => 'special_image',
+				'label' => 'Imagem representativa',
 			),
 		),
 	);
@@ -150,14 +145,14 @@ function my_add_taxonomy_meta(){
  * @TODO image, order
  * 
  */
-//add_action('admin_init', 'my_taxonomy_columns');
+add_action('admin_init', 'my_taxonomy_columns');
 function my_taxonomy_columns(){
 	$columns = array(
-		'category' => array(
+		'portfolio_category' => array(
 			'cb' => '<input type="checkbox" />',
 			'name' => 'Nome da Categoria',
-			'term_color' => 'Cor',
-			'posts' => 'Posts',
+			'category_thumbnail' => 'Imagem',
+			'posts' => 'Qtd',
 		),
 	);
 	new BorosTaxonomyColumns( $columns );
@@ -167,17 +162,13 @@ function my_taxonomy_columns(){
  * Função callback de renderização de coluna
  * 
  */
-//add_action( 'boros_custom_taxonomy_column', 'boros_custom_taxonomy_column', 10, 3 );
+add_action( 'boros_custom_taxonomy_column', 'boros_custom_taxonomy_column', 10, 3 );
 function boros_custom_taxonomy_column( $taxonomy, $term_id, $column_name ){
-	if( $column_name == 'term_color' ){
-		$colors = get_option('colors');
-		$term_color = get_metadata( 'term', $term_id, 'term_color', true );
-		if( !empty($term_color) ){
-			//pal($term_color);
-			$term_color = str_replace( 'bg-color-type-', '', $term_color );
-			$color_name = $colors[$term_color]['color_name'];
-			$color_code = $colors[$term_color]['color_code'];
-			echo "<div style='width:25px;height:25px;background:{$color_code}'></div>{$color_name}";
+	if( $column_name == 'category_thumbnail' ){
+		$thumb = get_metadata('term', $term_id, 'category_thumbnail', true);
+		if( !empty($thumb) ){
+			$thumb_src = wp_get_attachment_image_src($thumb, 'post-thumbnail');
+			echo "<img src='{$thumb_src[0]}' alt='' style='width:100px;' />";
 		}
 	}
 }
