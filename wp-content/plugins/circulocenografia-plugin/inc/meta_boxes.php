@@ -22,12 +22,6 @@ function my_meta_boxes(){
 				'layout' => 'block',
 				'group_itens' => array(
 					array(
-						'name' => 'subtitle',
-						'type' => 'text',
-						'size' => 'full',
-						'label' => 'Subtítulo <small>(opcional)</small>',
-					),
-					array(
 						'name' => 'desc',
 						'type' => 'wp_editor',
 						'size' => 'full',
@@ -51,10 +45,44 @@ function my_meta_boxes(){
 						'label' => 'Alinhamento da imagem',
 						'std' => 'left',
 						'options' => array(
+							'separator' => ' ',
 							'values' => array(
 								'left' => 'Esquerda',
 								'right' => 'Direita',
+								'full' => 'Coluna cheia',
 							),
+						),
+					),
+				)
+			),
+		)
+	);
+	
+	$meta_boxes[] = array(
+		'id' => 'work_gallery_box', 
+		'title' => 'Galeria', 
+		'post_type' => array('portfolio'), 
+		'context' => 'normal', 
+		'priority' => 'default',
+		'itens' => array(
+			array(
+				'name' => 'work_gallery',
+				'type' => 'duplicate_group',
+				'layout' => 'block',
+				'group_itens' => array(
+					array(
+						'name' => 'caption',
+						'type' => 'text',
+						'size' => 'full',
+						'label' => 'Legenda <small>(opcional)</small>',
+					),
+					array(
+						'name' => 'image',
+						'type' => 'special_image',
+						'label' => 'Imagem',
+						'options' => array(
+							'layout' => 'compact',
+							'width' => false,
 						),
 					),
 				)
