@@ -11,7 +11,7 @@
 					<ul class="portfolio-category-items row">
 					<?php
 					$i = 1;
-					$ports = get_terms('portfolio_category', array('hide_empty' => false));
+					$ports = get_terms('portfolio_category', array('hide_empty' => false, 'orderby' => 'term_order'));
 					foreach( $ports as $cat ){
 						$thumb = get_metadata('term', $cat->term_id, 'category_thumbnail', true);
 						if( !empty($thumb) ){
@@ -36,7 +36,7 @@
 				 * Lista oculta de categorias com os respectivos itens
 				 * 
 				 */
-				$ports = get_terms('portfolio_category', array('hide_empty' => false));
+				$ports = get_terms('portfolio_category', array('hide_empty' => false, 'orderby' => 'term_order'));
 				foreach( $ports as $cat ){
 					//pre($cat, 'cat', false);
 					$args = array(

@@ -7,6 +7,74 @@
  * 
  */
 
+
+
+/**
+ * ==================================================
+ * PORTFOLIO CATEGORY TRANSIENT =====================
+ * ==================================================
+ * Armazenar todas os termos de 'portfolio_category', assim como todos os posts('portfolio') de cada categoria. O resultado 
+ * será armazenado em transient e será usado para o menu de portfólio e a a página inicial dos trabalhos.
+ * 
+ */
+function circle_get_portfolio_category_transient(){
+	if( false === ( $portfolio_menu = get_transient('portfolio_menu') ) ){
+		// definir o array a ser salvo, com data atual
+		date_default_timezone_set(get_option('timezone_string'));
+		$portfolio_menu = array('creation' => date('Y-m-d-H-i-s'));
+		
+		// buscar termos
+		$ports = get_terms('portfolio_category', array('hide_empty' => false, 'orderby' => 'term_order'));
+		$portfolio_menu['categories'] = $ports;
+		
+		// buscar posts de cada termo
+		foreach( $ports as $cat ){
+			$portfolio_menu[posts][$cat->term_id] = array(
+				'term_id' => $cat->term_id,
+				'name' => $cat->name,
+				'posts' => array(),
+			);
+			$args = array(
+				'post_type' => 'portfolio',
+				'posts_per_page' => -1,
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'portfolio_category',
+						'field' => 'term_id',
+						'terms' => $cat->term_id,
+					),
+				),
+			);
+			$items = new WP_Query($args);
+			if( $items->posts ){
+				foreach( $items->posts as $post ){
+					$img = '';
+					$thumb = get_post_meta($post->ID, '_thumbnail_id', true);
+					if( !empty($thumb) ){
+						$thumb_src = wp_get_attachment_image_src($thumb, 'post-thumbnail');
+						$img = "<img src='{$thumb_src[0]}' alt='' class='img-responsive' />";
+					}
+					$portfolio_menu[posts][$cat->term_id]['posts'][] = array(
+						'ID' => $post->ID,
+						'title' => get_the_title($post->ID),
+						'link' => get_permalink($post->ID),
+						'thumb' => $thumb,
+						'img' => $img,
+					);
+				}
+			}
+			wp_reset_query();
+		}
+		set_transient( 'portfolio_menu', $portfolio_menu, 1 * DAY_IN_SECONDS );
+	}
+	return $portfolio_menu;
+}
+
+
+
+
+
+
 /**
  * ==================================================
  * CUSTOM SEARCH FORM ===============================
@@ -353,190 +421,5 @@ function boros_breadcrumb( $args = array() ){
 	
 	echo '</div>';
 }
-
-/* ========================================================================== */
-/* BOROS SLIDER ============================================================= */
-/* ========================================================================== */
-/**
- * Requisitos:
- * - javascript boros_slider_plugin linkado via 'head_config'
- * - este bloco gera o html estático do slider. As configuraçoes de ativação do script do slider são colocadas no js apropriado 'functions.js', e o CSS em 'css/slider.css'
- * 
- */
-function boros_slider( $meta_key, $layout = 'single', $numeric = false ){
-	global $post;
-	?>
-	<div class="slider_<?php echo $layout; ?>">
-		<?php
-		if( $meta_key == 'slider_home' )
-			$post_thumbnail_size = 'slider_home';
-		elseif( $meta_key == 'slider_blog' or $meta_key == 'slider_palavras' )
-			$post_thumbnail_size = 'post-thumbnail';
-		
-		$args = array(
-			'post_type' => 'any',
-			'post_status' => 'publish',
-			'posts_per_page' => -1,
-			'meta_key' => $meta_key,
-		);
-		$slides = new WP_Query();
-		$slides->query($args);	// posts habilitados
-		
-		$slider_order = get_option($meta_key);
-		$ordered_slides = array();
-		$slider_itens = explode(',', $slider_order);
-		foreach( $slider_itens as $slider ){
-			foreach( $slides->posts as $slide ){
-				if( $slide->ID == $slider ){
-					$ordered_slides[] = $slide;
-				}
-			}
-		}
-		//pre($ordered_slides);
-		if( $ordered_slides ){
-		?>
-		<div class="boros_slider boros_slider_<?php echo $layout; ?> <?php echo $meta_key; ?>_box">
-			<?php if( count($slides->posts) > 1 ) { ?>
-			<div class="boros_slider_nav <?php echo ($numeric == true) ? 'numeric' : ''; ?>">
-				<a rel="prev" class="btn_nav btn_prev btn_prev_next" title="anterior">&lt;</a> 
-				<a rel="next" class="btn_nav btn_next btn_prev_next" title="próximo">&gt;</a>
-			</div>
-			<?php } ?>
-			<div class="boros_slider_holder">
-				<ul class="boros_slider_strip">
-					<?php foreach($ordered_slides as $post){ setup_postdata($post); ?>
-					<li class="slide">
-						<div class="slide_inner">
-							<figure class="slide_image">
-								<?php
-								$thumb_id = get_post_meta($post->ID, '_thumbnail_id', true);
-								if( $thumb_id ){
-									$post_thumb = get_post($thumb_id);
-									$title_attr = the_title_attribute('echo=0');
-									?>
-									<a href="<?php the_permalink(); ?>">
-										<?php the_post_thumbnail( $post_thumbnail_size, array('title' => get_the_title(), 'class' => 'wp-post-image') ); ?>
-									</a>
-									<?php
-								}
-								else{
-									?>
-									<a href="<?php the_permalink(); ?>">
-										<img src="<?php echo THEME; ?>/css/img/slider_default.gif" class="wp-post-image" alt="<?php the_title(); ?>" />
-									</a>
-									<?php
-								}
-								?>
-							</figure>
-							<div class="details">
-								<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-								<div class="slide_resume"><?php the_title(); ?></div>
-								<a href="<?php the_permalink(); ?>" class="leia_mais_branco">leia mais</a>
-							</div>
-						</div>
-					</li>
-					<?php } ?>
-				</ul>
-			</div>
-		</div><!-- .slider -->
-		<?php } ?>
-	</div>
-	<?php
-}
-
-/**
- * INTEGRATED FUNCTION
- * Modelo de função integrando HTML, CSS e JS dinâmico via PHP.
- * Nesse exemplo:
- * - é criada uma HTML baseada nos argumentos de chamada.
- * - são definidos as variáveis dinâmicas a serem passadas para o JS.
- * - são enfileiradas as variáveis JS para serem exibidas no footer.
- * - CSS dinâmico adicional será adicionado inline, junto ao HTML de output.
- * 
- * IMPORTANTE: arquivos .js e .css estáticos ainda deverão ser registrados globalmente, em função inicializadora, em functions.php ou functions/head.php
- * @todo: pensar numa function que verifica as condicionais para enfileirar ou não o js/css - draft: gravar post_meta 'have_slider' e fazer a verificação em um hook pós-database @link:http://pippinsplugins.com/load-scripts-if-post-has-short-code/
- * 
- * 
- * @param array $defaults:
- * @param string	$id		identificador - precisa ser o mesmo nome registrado em 'wp_enqueue_script', e já precisa estar registrado
- * @param array	$php		array de opções para passar ao PHP
- * @param array	$js		array de opções para passar ao JS, define as variáveis dinâmicas - IMPORTANTE: valores booleanos deverão ser enviados 
-						como 0 e 1 e serão redenrizados como strings, portanto precisam ser convertidas no typecast correto. Recomendado 
-						usar Number(), já que atenderá ambos os casos de Boolean() e Number()
- * @param array	$css		array de opções para passar ao CSS, define as configurações de css, no modelo 'propriedade' => 'valor'
- * 
- */
-function integrated_function( $args ){
-	$result = new integrated_function( $args );
-	$result->output();
-}
-class integrated_function {
-	var $args = array();
-	var $defaults = array(
-		'id' => 'function_name',
-		'php' => array(
-			'option' => 'slide',
-			'image_size' => 'thumbnail',
-			'query' => array(
-				'post_type' => 'post',
-				'post_status' => 'publish',
-			),
-		),
-		'js' => array(
-			'numeric' => true,
-			'slideshow' => true,
-			'slideshow_time' => 7000,
-		),
-		'css' => array(),
-	);
-	
-	function __construct( $args ){
-		$attr = wp_parse_args( $args, $this->defaults );
-		$this->args = $attr;
-	}
-	
-	function output(){
-		$this->create_html();
-		$this->add_css();
-		$this->add_action();
-	}
-	
-	function create_html(){
-		extract( $this->args['php'] );
-		echo "
-			<div style='border:1px solid red;'>
-				<h1 class='foo'>{$option}</h1>
-				<h2 class='bar'>{$image_size}</h2>
-				<dl class='foobar'>
-					<dt>{$query['post_type']}</dt>
-					<ds>{$query['post_status']}</ds>
-				</dl>
-			</div>
-		";
-	}
-	
-	/**
-	 * Adicionar CSS inline dinâmico, caso exista
-	 * 
-	 */
-	function add_css(){
-		boros_print_css( $this->args['css'] );
-	}
-	
-	/**
-	 * Enfileirar JS dinâmico para exibir no footer
-	 * 
-	 */
-	function enqueue_js(){
-		wp_localize_script( $this->args['id'], $this->args['id'], $this->args['js'] );
-	}
-	
-	function add_action(){
-		add_action( 'wp_print_footer_scripts', array($this, 'enqueue_js') );
-	}
-}
-
-
-
 
 

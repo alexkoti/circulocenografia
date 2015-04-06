@@ -6,9 +6,12 @@
 
 get_header(); ?>
 		
-		<div id="column">
-			<?php boros_breadcrumb(); ?>
-			
+<div class="container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-md-3 col-sm-4 col-xs-6 sidebar-offcanvas" id="offcanvas-sidebar">
+			<?php get_template_part('menu-lateral'); ?>
+		</div>
+		<div class="col-md-9 col-sm-8 col-xs-12" id="offcanvas-content">
 			<?php
 			/**
 			 * Caso tenha posts para exibir
@@ -27,7 +30,7 @@ get_header(); ?>
 			 * IMPORTANTE: isso não é exatamente a mesma coisa que o 404 not found(este possui template próprio), é aplicado à uma requisição válida porém sem resultados
 			 * conforme o contexto, por exemplo listagem de posts na página 999, onde não existem mais posts para exibir.
 			 */
-			 else {
+			else {
 				?>
 				<article class="post hentry no-results not-found">
 					<header class="entry_header">
@@ -38,11 +41,10 @@ get_header(); ?>
 					</div>
 				</article>
 				<?php
-			 }
+			}
 			?>
-			
-		</div><!-- .column -->
-		
-		<?php get_sidebar(); ?>
-		
+		</div>
+	</div>
+</div>
+
 <?php get_footer() ?>

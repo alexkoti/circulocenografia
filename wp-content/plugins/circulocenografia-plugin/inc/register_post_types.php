@@ -126,12 +126,11 @@ function register_post_types(){
 		'rewrite' => true,
 		'capability_type' => 'post',
 		'hierarchical' => true,
-		'has_archive' => 'artigos',
+		'has_archive' => 'portfolio',
 		'menu_icon' => 'dashicons-art',
 		//'show_in_menu' => 'edit.php?post_type=artigo',
 		'supports' => array(
 			'title',
-			'editor',
 			'thumbnail',
 		)
 	); 
@@ -141,9 +140,116 @@ function register_post_types(){
 		'columns' => array(
 			'cb' => '<input type="checkbox" />',
 			'title' => 'Título',
+			'thumb' => 'Imagem',
 			'date' => 'Data',
 		)
 	);
+	new BorosPostTypeColumns( $columns_config );
+	
+	
+	
+	/**
+	 * CURSOS
+	 * 
+	 */
+	$labels = array(
+		'name' => 'Cursos',
+		'singular_name' => 'Curso',
+		'menu_name' => 'Cursos',
+		'add_new' => 'Novo Curso',
+		'add_new_item' => 'Adicionar Curso',
+		'edit_item' => 'Editar Curso',
+		'new_item' => 'Novo Curso',
+		'view_item' => 'Ver Curso',
+		'search_items' => 'Buscar Curso',
+		'not_found' =>  'Nenhum encontrado',
+		'not_found_in_trash' => 'Nenhum encontrado na lixeira',
+		'parent_item_colon' => '',
+	);
+	$args = array(
+		'labels' => $labels,
+		'description' => 'Cursos',
+		'public' => true,
+			'publicly_queryable' => true,
+			'exclude_from_search' => false,
+			'show_ui' => true,
+			'show_in_nav_menus' => true,
+		'query_var' => true,
+		'rewrite' => true,
+		'capability_type' => 'post',
+		'hierarchical' => false,
+		'has_archive' => false,
+		'menu_icon' => 'dashicons-welcome-learn-more',
+		//'show_in_menu' => 'edit.php?post_type=artigo',
+		'supports' => array(
+			'title',
+			'editor',
+			'thumbnail',
+		)
+	); 
+	register_post_type( 'curso' , $args );
+	$columns_config = array(
+		'post_type' => 'curso',
+		'columns' => array(
+			'cb' => '<input type="checkbox" />',
+			'title' => 'Título',
+			'date' => 'Data',
+		)
+	);
+	new BorosPostTypeColumns( $columns_config );
+	
+	
+	
+	/**
+	 * NA MÍDIA
+	 * 
+	 */
+	$labels = array(
+		'name' => 'Clipping',
+		'singular_name' => 'Clipping',
+		'menu_name' => 'Na Mídia',
+		'add_new' => 'Novo Clipping',
+		'add_new_item' => 'Adicionar Clipping',
+		'edit_item' => 'Editar Clipping',
+		'new_item' => 'Novo Clipping',
+		'view_item' => 'Ver Clipping',
+		'search_items' => 'Buscar Clipping',
+		'not_found' =>  'Nenhum encontrado',
+		'not_found_in_trash' => 'Nenhum encontrado na lixeira',
+		'parent_item_colon' => '',
+	);
+	$args = array(
+		'labels' => $labels,
+		'description' => 'Clippings',
+		'public' => true,
+			'publicly_queryable' => true,
+			'exclude_from_search' => false,
+			'show_ui' => true,
+			'show_in_nav_menus' => true,
+		'query_var' => true,
+		'rewrite' => true,
+		'capability_type' => 'post',
+		'hierarchical' => false,
+		'has_archive' => 'clipping',
+		'menu_icon' => 'dashicons-megaphone',
+		//'show_in_menu' => 'edit.php?post_type=artigo',
+		'supports' => array(
+			'title',
+			'editor',
+			'thumbnail',
+		)
+	); 
+	register_post_type( 'clipping' , $args );
+	$columns_config = array(
+		'post_type' => 'clipping',
+		'columns' => array(
+			'cb' => '<input type="checkbox" />',
+			'title' => 'Título',
+			'thumb' => 'Imagem',
+			'date' => 'Data',
+		)
+	);
+	new BorosPostTypeColumns( $columns_config );
 	
 }
 

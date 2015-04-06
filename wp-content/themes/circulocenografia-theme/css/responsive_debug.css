@@ -62,7 +62,7 @@
 		color:#fff;
 		display:block;
 		text-align:center;
-		background:rgba(160, 0, 0, 0.7);
+		background:rgba(160, 0, 0, 0.5);
 		padding:2px 0;
 		font-size:11px;
 		text-shadow:1px 1px 1px #000;
@@ -84,7 +84,7 @@
 		color:#fff;
 		display:block;
 		text-align:center;
-		background:rgba(255, 0, 0, 0.7);
+		background:rgba(255, 0, 0, 0.5);
 		padding:2px 0;
 		font-size:11px;
 		text-shadow:1px 1px 1px #000;
@@ -106,7 +106,7 @@
 		color:#fff;
 		display:block;
 		text-align:center;
-		background:rgba(255, 169, 0, 0.7);
+		background:rgba(255, 169, 0, 0.5);
 		padding:2px 0;
 		font-size:11px;
 		text-shadow:1px 1px 1px #000;
@@ -128,7 +128,7 @@
 		color:#fff;
 		display:block;
 		text-align:center;
-		background:rgba(200, 200, 0, 0.7);
+		background:rgba(200, 200, 0, 0.5);
 		padding:2px 0;
 		font-size:11px;
 		text-shadow:1px 1px 1px #000;
@@ -150,7 +150,7 @@
 		color:#fff;
 		display:block;
 		text-align:center;
-		background:rgba(30, 200, 0, 0.7);
+		background:rgba(30, 200, 0, 0.5);
 		padding:2px 0;
 		font-size:11px;
 		text-shadow:1px 1px 1px #000;
@@ -172,7 +172,7 @@
 		color:#fff;
 		display:block;
 		text-align:center;
-		background:rgba(0, 200, 200, 0.7);
+		background:rgba(0, 200, 200, 0.5);
 		padding:2px 0;
 		font-size:11px;
 		text-shadow:1px 1px 1px #000;
@@ -194,7 +194,7 @@
 		color:#fff;
 		display:block;
 		text-align:center;
-		background:rgba(0, 0, 200, 0.7);
+		background:rgba(0, 0, 200, 0.5);
 		padding:2px 0;
 		font-size:11px;
 		text-shadow:1px 1px 1px #000;
@@ -216,7 +216,7 @@
 		color:#fff;
 		display:block;
 		text-align:center;
-		background:rgba(0, 0, 120, 0.7);
+		background:rgba(0, 0, 120, 0.5);
 		padding:2px 0;
 		font-size:11px;
 		text-shadow:1px 1px 1px #000;

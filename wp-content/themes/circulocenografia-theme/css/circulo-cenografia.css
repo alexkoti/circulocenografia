@@ -21,10 +21,6 @@ body {
 body {
 	padding-top:60px;
 }
-.navbar-toggle {
-	float:left;
-	margin-left:15px;
-}
 #menu-top {
 	background:#000;
 	border:none;
@@ -40,14 +36,19 @@ body {
 	padding:5px 0 5px 50px;
 }
 .navbar-default .navbar-toggle {
-	border-color:#ed1b24;
-	background:rgba(237,27,36,0.8);
+	border:none;
+	border-radius:0;
+	background:rgba(237, 27, 36, 0.6);
+	float:left;
+	height:50px;
+	margin:0 10px 0 0;
 }
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-	background:rgba(237,27,36,1);
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+	background:rgba(237, 27, 36, 0.8);
 }
 .navbar-default .navbar-toggle .icon-bar {
-	background:#fff;
+	background:rgba(255, 255, 255, 0.7);
 }
 @media screen and (min-width: 768px) {
 	body {
@@ -94,10 +95,10 @@ body {
 #offcanvas ul li#portfolio-submenu {
 	
 }
-#offcanvas ul li#portfolio-submenu ul {
+#offcanvas ul > li > ul {
 	margin-left:30px;
 }
-#offcanvas ul li#portfolio-submenu ul li {
+#offcanvas ul > li > ul > li {
 	text-transform:none;
 }
 #offcanvas ul li#portfolio-submenu .category-link {

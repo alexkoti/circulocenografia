@@ -174,6 +174,19 @@ function boros_custom_taxonomy_column( $taxonomy, $term_id, $column_name ){
 }
 
 /**
+ * Limpar transient 'portfolio_menu' quando criar, editar ou apagar uma categoria de portfolio
+ * 
+ */
+add_action( 'create_portfolio_category', 'reset_portfolio_menu_transient' ); 
+add_action( 'edit_portfolio_category', 'reset_portfolio_menu_transient' ); 
+add_action( 'delete_portfolio_category', 'reset_portfolio_menu_transient' ); 
+function reset_portfolio_menu_transient(){
+	delete_transient('portfolio_menu');
+}
+
+
+
+/**
  * ==================================================
  * CUSTOM POST TYPES IN CORE TAXONOMIES QUERIES =====
  * ==================================================
