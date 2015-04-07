@@ -22,7 +22,7 @@
 							$portfolio_menu = circle_get_portfolio_category_transient();
 							//pre($portfolio_menu, $portfolio_menu['creation'], 'portfolio_menu', false);
 							foreach( $portfolio_menu['posts'] as $cat ){
-								echo "<li class='portfolio-category-menu-item'><span class='category-link' data-target='portfolio-category-{$cat['term_id']}'>{$cat['name']}</span>";
+								echo "<li class='portfolio-category-menu-item'><span class='category-link' id='portfolio-link-category-{$cat['term_id']}' data-target='portfolio-category-{$cat['term_id']}'>{$cat['name']}</span>";
 								if( !empty($cat['posts']) ){
 									foreach( $cat['posts'] as $post ){
 										$class = 'portfolio-category-items';

@@ -33,11 +33,18 @@ jQuery(document).ready(function($){
 	 * 
 	 */
 	$('#portfolio-submenu .category-link, #portfolio-categories-list .portfolio-item-link').on('click', function(){
-		var link = $(this);
+		if( $(this).is('.category-link') ){
+			var link = $(this);
+		}
+		else{
+			var link = $('#' + $(this).attr('data-related-menu-link'));
+		}
+		
 		var target = $(this).attr('data-target');
 		var active = $('#portfolio-box .active');
 		//console.log(active);
 		//console.log(target);
+		
 		if( active.attr('id') != target ){
 			active.fadeOut(400, function(){
 				$('#portfolio-box .portfolio-category').removeClass('active');
@@ -46,6 +53,7 @@ jQuery(document).ready(function($){
 				});
 			});
 		}
+		
 		if( $('#portfolio-submenu .portfolio-category-items:visible').length ){
 			var ul = link.closest('.portfolio-category-menu-item').find('.portfolio-category-items');
 			if( ul.is(':visible') ){

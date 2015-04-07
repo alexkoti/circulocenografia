@@ -22,19 +22,6 @@ function my_meta_boxes(){
 				'layout' => 'block',
 				'group_itens' => array(
 					array(
-						'name' => 'desc',
-						'type' => 'textarea_editor',
-						'size' => 'full',
-						'label' => 'Texto',
-						'options' => array(
-							'editor' => array(
-								'toolbar' => 'formatselect bold italic link bullist numlist alignleft aligncenter alignright undo redo image charmap code',
-								'buttons' => 'bold,italic,link,bullist,numlist,image,|,justifyleft,justifycenter,justifyright,|,undo,redo,|,code',
-								'buttons2' => '',
-							),
-						),
-					),
-					array(
 						'name' => 'image',
 						'type' => 'special_image',
 						'label' => 'Imagem',
@@ -57,6 +44,19 @@ function my_meta_boxes(){
 							),
 						),
 					),
+					array(
+						'name' => 'desc',
+						'type' => 'textarea_editor',
+						'size' => 'full',
+						'label' => 'Texto',
+						'options' => array(
+							'editor' => array(
+								'toolbar' => 'formatselect bold italic link bullist numlist alignleft aligncenter alignright undo redo image charmap code',
+								'buttons' => 'bold,italic,link,bullist,numlist,image,|,justifyleft,justifycenter,justifyright,|,undo,redo,|,code',
+								'buttons2' => '',
+							),
+						),
+					),
 				)
 			),
 		)
@@ -75,12 +75,6 @@ function my_meta_boxes(){
 				'layout' => 'block',
 				'group_itens' => array(
 					array(
-						'name' => 'caption',
-						'type' => 'text',
-						'size' => 'full',
-						'label' => 'Legenda <small>(opcional)</small>',
-					),
-					array(
 						'name' => 'image',
 						'type' => 'special_image',
 						'label' => 'Imagem',
@@ -88,6 +82,12 @@ function my_meta_boxes(){
 							'layout' => 'compact',
 							'width' => false,
 						),
+					),
+					array(
+						'name' => 'caption',
+						'type' => 'text',
+						'size' => 'full',
+						'label' => 'Legenda <small>(opcional)</small>',
 					),
 				)
 			),

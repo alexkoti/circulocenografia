@@ -302,6 +302,8 @@ html.active, body.active {
 	#portfolio-box .portfolio-category ul.portfolio-category-items li .portfolio-item-title {
 		color:#fff;
 		text-shadow: 1px 1px 1px #000;
+		padding:0 10px;
+		box-sizing:border-box;
 		position:absolute;
 		width:100%;
 		top:50%;

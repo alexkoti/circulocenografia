@@ -174,13 +174,20 @@ function boros_custom_taxonomy_column( $taxonomy, $term_id, $column_name ){
 }
 
 /**
- * Limpar transient 'portfolio_menu' quando criar, editar ou apagar uma categoria de portfolio
+ * Limpar transient 'portfolio_menu' quando criar, editar ou apagar uma categoria de portfolio ou trabalho do portfolio
  * 
  */
-add_action( 'create_portfolio_category', 'reset_portfolio_menu_transient' ); 
-add_action( 'edit_portfolio_category', 'reset_portfolio_menu_transient' ); 
-add_action( 'delete_portfolio_category', 'reset_portfolio_menu_transient' ); 
-function reset_portfolio_menu_transient(){
+add_action( 'create_portfolio_category', 'reset_portfolio_menu_transient' );
+add_action( 'edit_portfolio_category', 'reset_portfolio_menu_transient' );
+add_action( 'delete_portfolio_category', 'reset_portfolio_menu_transient' );
+function reset_portfolio_menu_transient1(){
+	delete_transient('portfolio_menu');
+}
+
+// ao adicionar, editar ou apagar um trabalho do portfolio
+add_action( 'save_post_portfolio', 'reset_portfolio_menu_transient2' );
+add_action( 'delete_post', 'reset_portfolio_menu_transient2' );
+function reset_portfolio_menu_transient2(){
 	delete_transient('portfolio_menu');
 }
 

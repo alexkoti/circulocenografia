@@ -21,7 +21,7 @@
 						else{
 							$img = "<img src='".CSS_IMG."/cat-placeholder.jpg' alt='' class='img-responsive' />";
 						}
-						echo "<li class='col-md-3 col-sm-4 col-xs-6'><div class='portfolio-item-content'>{$img}<div class='portfolio-item-title'>{$cat->name}</div><span class='portfolio-item-link' data-target='portfolio-category-{$cat->term_id}'></span></div></li>";
+						echo "<li class='col-md-3 col-sm-4 col-xs-6'><div class='portfolio-item-content'>{$img}<div class='portfolio-item-title'>{$cat->name}</div><span class='portfolio-item-link' data-target='portfolio-category-{$cat->term_id}' data-related-menu-link='portfolio-link-category-{$cat->term_id}'></span></div></li>";
 						if( $i % 4 == 0 ){ echo '<li class="circle-divider divider-4 col-md-12 visible-lg-block visible-md-block"></li>'; }
 						if( $i % 3 == 0 ){ echo '<li class="circle-divider divider-3 col-xs-12 visible-sm-block"></li>'; }
 						if( $i % 2 == 0 ){ echo '<li class="circle-divider divider-2 col-xs-12 visible-xs-block"></li>'; }
