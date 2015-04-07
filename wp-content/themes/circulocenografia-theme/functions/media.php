@@ -25,12 +25,12 @@ if ( ! isset( $content_width ) ) $content_width = get_option('embed_size_w');
  */
 //add_image_size( 'tamanho_a', 400, 400, false );
 //add_image_size( 'tamanho_b', 800, 800, false );
-//add_image_size( 'tamanho_a', 1000, 1000, false );
+add_image_size( 'column_full', 880, 1000, false );
 
 add_filter( 'image_size_names_choose', 'image_sizes_names' );
 function image_sizes_names( $sizes ){
 	//$sizes['tamanho_a'] = 'Tamanho A';
-	//$sizes['tamanho_b'] = 'Tamanho B';
+	$sizes['tamanho_b'] = 'Tamanho B';
 	$sizes['post-thumbnail'] = 'Post Thumbnail';
 	return $sizes;
 }
