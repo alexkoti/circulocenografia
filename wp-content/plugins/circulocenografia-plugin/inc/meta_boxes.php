@@ -23,11 +23,15 @@ function my_meta_boxes(){
 				'group_itens' => array(
 					array(
 						'name' => 'desc',
-						'type' => 'wp_editor',
+						'type' => 'textarea_editor',
 						'size' => 'full',
 						'label' => 'Texto',
 						'options' => array(
-							'media_buttons' => true,
+							'editor' => array(
+								'toolbar' => 'formatselect bold italic link bullist numlist alignleft aligncenter alignright undo redo image charmap code',
+								'buttons' => 'bold,italic,link,bullist,numlist,image,|,justifyleft,justifycenter,justifyright,|,undo,redo,|,code',
+								'buttons2' => '',
+							),
 						),
 					),
 					array(
