@@ -52,6 +52,7 @@
 					);
 					$items = new WP_Query($args);
 					if( $items->posts ){
+						$i = 1;
 						echo "<div class='portfolio-category' id='portfolio-category-{$cat->term_id}'><ul class='portfolio-category-items row'>";
 						foreach( $items->posts as $post ){
 							$img = '';
@@ -62,6 +63,10 @@
 							}
 							$link = get_permalink($post->ID);
 							echo "<li class='col-md-3 col-sm-4 col-xs-6'><div class='portfolio-item-content'>{$img}<div class='portfolio-item-title'>{$post->post_title}</div><a href='{$link}' class='portfolio-item-link'></a></div></li>";
+							if( $i % 4 == 0 ){ echo '<li class="circle-divider divider-4 col-md-12 visible-lg-block visible-md-block"></li>'; }
+							if( $i % 3 == 0 ){ echo '<li class="circle-divider divider-3 col-xs-12 visible-sm-block"></li>'; }
+							if( $i % 2 == 0 ){ echo '<li class="circle-divider divider-2 col-xs-12 visible-xs-block"></li>'; }
+							$i++;
 						}
 						echo '</ul></div>';
 					}
