@@ -351,13 +351,13 @@ html.active, body.active {
 	display:block;
 	float:left;
 	margin:0 10px 0 0;
-	width:40%;
+	width:50%;
 }
 .single-portfolio-content .entry_content .item-description .image-right {
 	display:block;
 	float:right;
 	margin:0 0 0 10px;
-	width:40%;
+	width:50%;
 }
 .single-portfolio-content .entry_content .item-description .image-full {
 	display:block;
@@ -366,8 +366,49 @@ html.active, body.active {
 	width:100%;
 }
 
+/* video responsivo */
+.videoWrapper {
+	height: 0;
+	padding-bottom: 56.25%;
+	padding-top: 25px;
+	position: relative;
+}
+.videoWrapper iframe {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
 
+/* galeria */
+.single-portfolio-gallery {
+	position:relative;
+}
+#single-portfolio-gallery-owl-carousel {
+	
+}
+#single-portfolio-gallery-owl-carousel .owl-item {
+	
+}
+#single-portfolio-gallery-owl-carousel .owl-item a {
+	display:block;
+	width:100%;
+}
+#single-portfolio-gallery-owl-carousel .owl-item a img {
+	display:block;
+	width:100%;
+}
 
+/* viewport celulares, tamanho menor */
+@media screen and (max-width: 380px) {
+	.single-portfolio-content .entry_content .item-description .image-left, 
+	.single-portfolio-content .entry_content .item-description .image-right {
+		float:none;
+		margin:0;
+		width:100%;
+	}
+}
 
 
 

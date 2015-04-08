@@ -42,6 +42,11 @@ function add_frontend_styles(){
 	$css = new BorosCss();
 	$css->add('bootstrap.min');
 	$css->add('wp');
+	$css->add('photoswipe');
+	$css->add('default-skin', 'photoswipe-default-skin');
+	$css->add('owl.carousel');
+	$css->add('owl.theme');
+	$css->add('owl.transitions');
 	$css->add('circulo-cenografia');
 	
 	if( defined('LOCALHOST') and LOCALHOST == true ){
@@ -93,6 +98,9 @@ function add_frontend_scripts(){
 	$js = new BorosJs();
 	$js->jquery('jquery.validate.min', 'libs');
 	$js->jquery('bootstrap.min', 'libs');
+	$js->jquery('photoswipe', 'libs');
+	$js->jquery('photoswipe-ui-default.min', 'libs');
+	$js->jquery('owl.carousel.min', 'libs');
 	$js->jquery('functions');
 	//$js->add('modernizr', 'libs', false, false);
 	//$js->add('html5', 'libs', false, false);

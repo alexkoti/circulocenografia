@@ -27,13 +27,31 @@
 						$img_src = wp_get_attachment_image_src($desc['image'], 'medium');
 					?>
 					<div class="item-description clearfix">
-						<img src="<?php echo $img_src[0]; ?>" class="image-<?php echo $desc['align']; ?>" alt="" />
+						<?php if( !empty($desc['image']) ){ echo "<img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' />"; } ?>
 						<?php echo apply_filters('the_content', $desc['desc']); ?>
 					</div>
 					<?php
 					}
 					?>
 				</div>
+				
+				<?php
+				$gallery = get_post_meta($post->ID, 'work_gallery', true);
+				if( !empty($gallery) ){
+					//pre($gallery, 'gallery', false);
+				?>
+				<div class="single-portfolio-gallery">
+					<div id="single-portfolio-gallery-owl-carousel" class="owl-carousel">
+					<?php
+					foreach( $gallery as $photo ){
+						$photo_src = wp_get_attachment_image_src($photo['image'], 'thumbnail');
+						$photo_large_src = wp_get_attachment_image_src($photo['image'], 'large');
+						echo "<a href='{$photo_large_src[0]}' target='_blank' class='gallery-link' data-sizes='{$photo_large_src[1]}x{$photo_large_src[2]}'><img src='{$photo_src[0]}' alt='{$photo['caption']}' class='img-responsive' /></a>";
+					}
+					?>
+					</ul>
+				</div>
+				<?php } ?>
 			</article>
 			<?php
 				}

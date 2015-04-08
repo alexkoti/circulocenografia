@@ -79,6 +79,50 @@ jQuery(document).ready(function($){
 	
 	
 	/**
+	 * OWL CAROUSEL
+	 * 
+	 */
+	$('#single-portfolio-gallery-owl-carousel').owlCarousel();
+	
+	
+	/**
+	 * PHOTOSWIPE
+	 * 
+	 */
+	if( $('#single-portfolio-gallery-owl-carousel').length ){
+		var pswpElement = document.querySelectorAll('.pswp')[0];
+		
+		// build items array
+		var items = [];
+		
+		$('#single-portfolio-gallery-owl-carousel .owl-item').each(function(){
+			var link = $(this).find('.gallery-link');
+			var sizes = link.attr('data-sizes').split('x');
+			var photo = {
+				src : link.attr('href'),
+				w : sizes[0],
+				h : sizes[1],
+				title : $(this).find('.gallery-link img').attr('alt')
+			}
+			items.push(photo);
+		});
+		//console.log(items);
+		
+		$('#single-portfolio-gallery-owl-carousel .owl-item a.gallery-link').on('click', function(evt){
+			evt.preventDefault();
+			var elem_index = $(this).closest('.owl-item').index();
+		
+			var options = { index : elem_index, loop : false }
+			
+			// Initializes and opens PhotoSwipe
+			var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options );
+			gallery.init(1);
+		});
+	}
+	
+	
+	
+	/**
 	 * VALIDATION
 	 * Ações para validação js de comentários
 	 * 
