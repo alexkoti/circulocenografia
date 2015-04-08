@@ -82,7 +82,10 @@ jQuery(document).ready(function($){
 	 * OWL CAROUSEL
 	 * 
 	 */
-	$('#single-portfolio-gallery-owl-carousel').owlCarousel();
+	$('#single-portfolio-gallery-owl-carousel').owlCarousel({
+		itemsMobile : [479, 2],
+		itemsTablet : [768, 3]
+	});
 	
 	
 	/**

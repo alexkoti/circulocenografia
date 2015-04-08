@@ -10,7 +10,7 @@
 add_theme_support( 'post-thumbnails', array( 'post', 'page', 'portfolio' ) );
 
 // tamanho do post-thumb W, H, crop
-set_post_thumbnail_size( 300, 300, true ); //slider home
+set_post_thumbnail_size( 400, 400, true ); //slider home
 
 if ( ! isset( $content_width ) ) $content_width = get_option('embed_size_w');
 

@@ -44,7 +44,7 @@
 					<div id="single-portfolio-gallery-owl-carousel" class="owl-carousel">
 					<?php
 					foreach( $gallery as $photo ){
-						$photo_src = wp_get_attachment_image_src($photo['image'], 'thumbnail');
+						$photo_src = wp_get_attachment_image_src($photo['image'], 'post-thumbnail');
 						$photo_large_src = wp_get_attachment_image_src($photo['image'], 'large');
 						echo "<a href='{$photo_large_src[0]}' target='_blank' class='gallery-link' data-sizes='{$photo_large_src[1]}x{$photo_large_src[2]}'><img src='{$photo_src[0]}' alt='{$photo['caption']}' class='img-responsive' /></a>";
 					}
