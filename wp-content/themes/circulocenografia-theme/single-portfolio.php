@@ -16,31 +16,49 @@
 					$thumb_src = wp_get_attachment_image_src($thumb, 'column_full');
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class('single-portfolio-content'); ?>>
-				<header class="entry_header">
-					<h1><?php the_title(); ?></h1>
-					<img src="<?php echo $thumb_src[0]; ?>" alt="" />
-				</header>
 				<div class="entry_content">
 					<?php
-					$description = get_post_meta($post->ID, 'work_description', true);
+					$description = get_post_meta($post->ID, 'work_description', true); //pre($description);
+					$i = 1;
 					foreach( $description as $desc ){
+						$title = '';
+						if( $i == 1 ){
+							$title = '<h1>' . get_the_title($post->ID) . '</h1>';
+						}
 						$img_src = wp_get_attachment_image_src($desc['image'], 'medium');
+						
+						$class = "item-description item-type-{$desc['align']} clearfix";
 					?>
-					<div class="item-description clearfix">
-						<?php if( !empty($desc['image']) ){ echo "<img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' />"; } ?>
-						<?php echo apply_filters('the_content', $desc['desc']); ?>
+					<div class="<?php echo $class; ?>">
+						<?php
+						if( $desc['align'] != 'full' ){
+							echo $title;
+						}
+						
+						if( !empty($desc['image']) and !empty($img_src) ){
+							if( $desc['align'] == 'full' ){
+								echo "<div class='item-image'>{$title}<img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></div>";
+							}
+							else{
+								echo "<div class='item-image'><img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></div>";
+							}
+						}
+						
+						echo apply_filters('the_content', $desc['desc']); ?>
 					</div>
 					<?php
+						$i++;
 					}
 					?>
 				</div>
 				
 				<?php
-				$gallery = get_post_meta($post->ID, 'work_gallery', true);
+				$gallery = boros_trim_array(get_post_meta($post->ID, 'work_gallery', true));
 				if( !empty($gallery) ){
 					//pre($gallery, 'gallery', false);
 				?>
 				<div class="single-portfolio-gallery">
+					<h2>Galeria</h2>
 					<div id="single-portfolio-gallery-owl-carousel" class="owl-carousel">
 					<?php
 					foreach( $gallery as $photo ){
