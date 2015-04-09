@@ -94,6 +94,28 @@ function my_meta_boxes(){
 		)
 	);
 	
+	$meta_boxes[] = array(
+		'id' => 'work_color_box', 
+		'title' => 'Cores', 
+		'post_type' => array('portfolio'), 
+		'context' => 'side', 
+		'priority' => 'default',
+		'itens' => array(
+			array(
+				'name' => 'work_color_bg',
+				'type' => 'color_picker',
+				'label' => 'Cor do fundo',
+				'layout' => 'block',
+			),
+			array(
+				'name' => 'work_color_text',
+				'type' => 'color_picker',
+				'label' => 'Cor dos textos',
+				'layout' => 'block',
+			),
+		)
+	);
+	
 	$my_meta_boxes = new BorosMetaBoxes( $meta_boxes );
 }
 

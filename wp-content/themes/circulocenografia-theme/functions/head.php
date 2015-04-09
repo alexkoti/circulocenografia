@@ -33,6 +33,28 @@ function work_opengraph(){
 
 /**
  * ==================================================
+ * CORES PERSONALIZADAS =============================
+ * ==================================================
+ * 
+ * 
+ */
+add_action( 'wp_head', 'circulo_custom_colors' );
+function circulo_custom_colors(){
+	if( is_singular('portfolio') ){
+		global $post;
+		$work_color_bg = get_post_meta($post->ID, 'work_color_bg', true);
+		$work_color_text = get_post_meta($post->ID, 'work_color_text', true);
+		
+		if( !empty($work_color_bg) and !empty($work_color_text) ){
+			echo "<style type='text/css'>body { background-color:{$work_color_bg}; color:{$work_color_text}; } #offcanvas a, #offcanvas ul li#portfolio-submenu .category-link { color:{$work_color_text}; }</style>";
+		}
+	}
+}
+
+
+
+/**
+ * ==================================================
  * STYLESHEETS ======================================
  * ==================================================
  * 
