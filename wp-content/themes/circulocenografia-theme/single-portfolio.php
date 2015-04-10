@@ -25,18 +25,29 @@
 						if( $i == 1 ){
 							$title = '<h1>' . get_the_title($post->ID) . '</h1>';
 						}
-						$img_src = wp_get_attachment_image_src($desc['image'], 'medium');
+						$image_size = ($desc['align'] == 'full') ? 'large' : 'medium';
+						$img_src = wp_get_attachment_image_src($desc['image'], $image_size);
 						
+						// class tipo de item
 						$class = "item-description item-type-{$desc['align']} clearfix";
+						
+						// class bordas arredondadas
+						if( isset($desc['border']) ){
+							$class .= ' border-radius';
+						}
 					?>
 					<div class="<?php echo $class; ?>">
 						<?php
-						if( $desc['align'] != 'full' ){
+						if( $desc['align'] != 'full' and empty($desc['image_extra']) ){
 							echo $title;
 						}
 						
 						if( !empty($desc['image']) and !empty($img_src) ){
-							if( $desc['align'] == 'full' ){
+							if( !empty($desc['image_extra']) ){
+								$img_extra_src = wp_get_attachment_image_src($desc['image_extra'], 'medium');
+								echo "<div class='item-image extra-image'>{$title}<img src='{$img_src[0]}' alt='' class='image-half image-half-left' /><img src='{$img_extra_src[0]}' alt='' class='image-half image-half-right' /></div>";
+							}
+							elseif( $desc['align'] == 'full' ){
 								echo "<div class='item-image'>{$title}<img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></div>";
 							}
 							else{

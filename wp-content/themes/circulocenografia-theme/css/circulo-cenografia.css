@@ -354,6 +354,27 @@ html.active, body.active {
 	margin:0 0 40px;
 	position:relative;
 }
+.single-portfolio-content .entry_content .item-description.border-radius {
+	
+}
+.single-portfolio-content .entry_content .item-description.border-radius .item-image img {
+	border-radius:20px;
+}
+.single-portfolio-content .entry_content .item-description .extra-image {
+	margin-bottom:10px;
+}
+.single-portfolio-content .entry_content .item-description .extra-image img {
+	width:50%;
+}
+.single-portfolio-content .entry_content .item-description .extra-image img.image-half-left {
+	border-top-right-radius:0;
+	border-bottom-right-radius:0;
+}
+.single-portfolio-content .entry_content .item-description .extra-image img.image-half-right {
+	border-top-left-radius:0;
+	border-bottom-left-radius:0;
+}
+
 /*  diminuir margem superior apenas para o primeiro h1 */
 .single-portfolio-content .entry_content .item-description:first-child h1 {
 	margin-top:0;
@@ -413,10 +434,11 @@ html.active, body.active {
 
 @media screen and (min-width: 767px) {
 	/* título do primeiro bloco + imagem de coluna cheia possui o h1 dentro da imagem */
+	.single-portfolio-content .entry_content .item-description .extra-image h1, 
 	.single-portfolio-content .entry_content .item-description.item-type-full h1 {
 		position:absolute;
-		top:20px;
-		left:25px;
+		top:15px;
+		left:17px;
 		color:#fff;
 		text-shadow:
 		   4px 2px 1px rgba(0, 0, 0, 0.5),
@@ -424,6 +446,8 @@ html.active, body.active {
 		  1px -1px 1px rgba(0, 0, 0, 0.5),
 		  -1px 1px 1px rgba(0, 0, 0, 0.5),
 		   1px 1px 1px rgba(0, 0, 0, 0.5);
+		background:rgba(0, 0, 0, 0.3);
+		padding:10px 16px;
 	}
 }
 

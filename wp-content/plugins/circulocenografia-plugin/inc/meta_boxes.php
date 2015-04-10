@@ -20,11 +20,21 @@ function my_meta_boxes(){
 				'name' => 'work_description',
 				'type' => 'duplicate_group',
 				'layout' => 'block',
+				'desc' => 'Caso seja usada a imagem extra, o alinhamento será ignorado e as duas imagens do bloco serão exibidas lado-a-lado, ocupando metade da largura da coluna',
 				'group_itens' => array(
 					array(
 						'name' => 'image',
 						'type' => 'special_image',
 						'label' => 'Imagem',
+						'options' => array(
+							'layout' => 'compact',
+							'width' => false,
+						),
+					),
+					array(
+						'name' => 'image_extra',
+						'type' => 'special_image',
+						'label' => 'Imagem extra',
 						'options' => array(
 							'layout' => 'compact',
 							'width' => false,
@@ -43,6 +53,12 @@ function my_meta_boxes(){
 								'full' => 'Coluna cheia',
 							),
 						),
+					),
+					array(
+						'name' => 'border',
+						'type' => 'checkbox',
+						'label' => 'Bordas arredondadas',
+						'input_helper' => 'com bordas arredondadas',
 					),
 					array(
 						'name' => 'desc',
