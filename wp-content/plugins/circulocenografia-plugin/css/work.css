@@ -1,1 +1,30 @@
 ﻿
+
+/**
+ * Opções de logos
+ * É preciso definir cor de fundo
+ * 
+ */
+#box_site_logo .item_radio {
+	margin:10px;
+}
+#box_site_logo .item_radio .option_logo {
+	display:inline-block;
+	padding:5px;
+}
+#box_site_logo .item_radio .option_logo#option_logo_1, 
+#box_site_logo .item_radio .option_logo#option_logo_2, 
+#box_site_logo .item_radio .option_logo#option_logo_3, 
+#box_site_logo .item_radio .option_logo#option_logo_4 {
+	background:#000;
+}
+#box_site_logo .item_radio .option_logo#option_logo_5, 
+#box_site_logo .item_radio .option_logo#option_logo_6, 
+#box_site_logo .item_radio .option_logo#option_logo_7, 
+#box_site_logo .item_radio .option_logo#option_logo_8 {
+	background:#fff;
+}
+#box_site_logo .item_radio .option_logo img {
+	display:inline-block;
+	height:40px;
+}

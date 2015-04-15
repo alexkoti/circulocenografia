@@ -59,6 +59,11 @@ function my_admin_pages_config(){
 			'capability'	=> 'manage_options', 
 			'icon_url'		=> 'dashicons-admin-generic',
 			'subpages' => array(
+				'section_home' => array(
+					'page_title'	=> 'Opções da Home', 
+					'menu_title'	=> 'Opções da Home', 
+					'capability'	=> 'manage_options', 
+				),
 				'section_general' => array(
 					'page_title'	=> 'Opções de Administração', 
 					'menu_title'	=> 'Opções de Administração', 

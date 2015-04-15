@@ -46,7 +46,16 @@ wp_head();
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a id="logo-header" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
+			<a id="logo-header" href="<?php echo home_url('/'); ?>">
+				<?php
+				$site_logo_src = CSS_IMG . '/circulo-cenografia-logo.png';
+				$site_logo = get_option('site_logo');
+				if( !empty($site_logo) ){
+					$site_logo_src = CSS_IMG . "/circulo-cenografia-logo-{$site_logo}.png";
+				}
+				?>
+				<img src="<?php echo $site_logo_src; ?>" alt="logo Círculo Cenografia" />
+			</a>
 		</div>
 	</div>
 </nav>

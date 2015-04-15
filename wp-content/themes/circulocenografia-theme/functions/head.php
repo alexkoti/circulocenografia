@@ -33,20 +33,33 @@ function work_opengraph(){
 
 /**
  * ==================================================
- * CORES PERSONALIZADAS =============================
+ * CSS CUSTOMIZADO PARA O HEAD ======================
  * ==================================================
  * 
  * 
  */
 add_action( 'wp_head', 'circulo_custom_colors' );
 function circulo_custom_colors(){
+	
+	// barra de menu personalizada
+	$site_logo = get_option('site_logo');
+	if( !empty($site_logo) ){
+		if( $site_logo <= 4 ){
+			echo "<style type='text/css'>#menu-top {background-color:#000}</style>";
+		}
+		else{
+			echo "<style type='text/css'>#menu-top {background-color:#fff}</style>";
+		}
+	}
+	
+	// cor e bg para páginas especiais
 	if( is_singular('portfolio') ){
 		global $post;
 		$work_color_bg = get_post_meta($post->ID, 'work_color_bg', true);
 		$work_color_text = get_post_meta($post->ID, 'work_color_text', true);
 		
 		if( !empty($work_color_bg) and !empty($work_color_text) ){
-			echo "<style type='text/css'>body { background-color:{$work_color_bg}; color:{$work_color_text}; } #offcanvas a, #offcanvas ul li#portfolio-submenu .category-link { color:{$work_color_text}; }</style>";
+			echo "<style type='text/css'>body, #offcanvas-sidebar { background-color:{$work_color_bg}; color:{$work_color_text}; } #offcanvas a, #offcanvas ul li#portfolio-submenu .category-link { color:{$work_color_text}; }</style>";
 		}
 	}
 }
@@ -120,7 +133,7 @@ function add_frontend_scripts(){
 	$js = new BorosJs();
 	$js->jquery('jquery.validate.min', 'libs');
 	$js->jquery('bootstrap.min', 'libs');
-	$js->jquery('photoswipe', 'libs');
+	$js->jquery('photoswipe.min', 'libs');
 	$js->jquery('photoswipe-ui-default.min', 'libs');
 	$js->jquery('owl.carousel.min', 'libs');
 	$js->jquery('functions');
