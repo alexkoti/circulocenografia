@@ -9,8 +9,14 @@
 
 // adicionar css
 add_action( 'login_head', 'custom_login_head' );
-function custom_login_head(){ 
-	echo '<link rel="stylesheet" type="text/css" href="' . THEME . '/css/login.css" />'; 
+function custom_login_head(){
+	echo '<link rel="stylesheet" type="text/css" href="' . THEME . '/css/login.css" />';
+	$site_logo_src = CSS_IMG . '/circulo-cenografia-logo.png';
+	$site_logo = get_option('site_logo');
+	if( !empty($site_logo) ){
+		$site_logo_src = CSS_IMG . "/circulo-cenografia-logo-{$site_logo}.png";
+	}
+	echo "<style type='text/css'>.login h1 a {background-image:url({$site_logo_src});}</style>";
 }
 
 // link do logo
