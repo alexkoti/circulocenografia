@@ -42,7 +42,17 @@
 							echo $title;
 						}
 						
-						if( !empty($desc['image']) and !empty($img_src) ){
+						if( isset($desc['video']) and !empty($desc['video']) ){
+							echo "<div class='portfolio-video video-align-{$desc['align']}'>";
+							echo apply_filters('the_content', $desc['video']);
+							echo '</div>';
+							if( isset($desc['video_extra']) and !empty($desc['video_extra']) ){
+								echo "<div class='portfolio-video video-align-{$desc['align']}'>";
+								echo apply_filters('the_content', $desc['video_extra']);
+								echo '</div>';
+							}
+						}
+						elseif( !empty($desc['image']) and !empty($img_src) ){
 							if( !empty($desc['image_extra']) ){
 								$img_extra_src = wp_get_attachment_image_src($desc['image_extra'], 'medium');
 								echo "<div class='item-image extra-image'>{$title}<img src='{$img_src[0]}' alt='' class='image-half image-half-left' /><img src='{$img_extra_src[0]}' alt='' class='image-half image-half-right' /></div>";

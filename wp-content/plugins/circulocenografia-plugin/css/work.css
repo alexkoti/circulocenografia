@@ -28,3 +28,27 @@
 	display:inline-block;
 	height:40px;
 }
+
+
+/**
+ * Montador de descrição do portfolio
+ * 
+ */
+#work_description_box .boros_form_block th small label {
+	padding:0;
+	vertical-align:bottom;
+}
+#work_description_box .boros_form_block th small label input {
+	vertical-align:bottom;
+}
+#work_description_box td.boros_element_textarea_editor {
+	display:none;
+}
+#work_description_box td.boros_element_textarea_editor.textarea_editor_show {
+	display:table-cell;
+}
+#work_description_box .duplicate_element_compact td.boros_element_textarea_editor.textarea_editor_show {
+	display:none;
+}
+
+

@@ -415,6 +415,19 @@ html.active, body.active {
 	width: 100%;
 }
 
+/* vídeo dentro do item */
+.single-portfolio-content .entry_content .item-description .portfolio-video.video-align-full {
+	width:100%;
+}
+.single-portfolio-content .entry_content .item-description .portfolio-video.video-align-left {
+	float:left;
+	width:50%;
+}
+.single-portfolio-content .entry_content .item-description .portfolio-video.video-align-right {
+	float:right;
+	width:50%;
+}
+
 /* galeria */
 .single-portfolio-gallery {
 	position:relative;

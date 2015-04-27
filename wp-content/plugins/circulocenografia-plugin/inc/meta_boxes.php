@@ -23,27 +23,70 @@ function my_meta_boxes(){
 				'desc' => 'Caso seja usada a imagem extra, o alinhamento será ignorado e as duas imagens do bloco serão exibidas lado-a-lado, ocupando metade da largura da coluna',
 				'group_itens' => array(
 					array(
+						'name' => 'type',
+						'type' => 'radio',
+						'label' => 'Tipo de item',
+						'std' => 'text',
+						'options' => array(
+							'separator' => ' &nbsp; ',
+							'values' => array(
+								'text'  => 'apenas texto',
+								'imagem_1' => 'uma imagem',
+								'imagem_2' => 'duas imagens',
+								'video_1'  => 'um vídeo',
+								'video_2'  => 'dois vídeos',
+							),
+						),
+					),
+					array(
 						'name' => 'image',
 						'type' => 'special_image',
 						'label' => 'Imagem',
 						'options' => array(
-							'layout' => 'compact',
-							'width' => false,
+							'image_size' => 'large',
+							'layout' => 'row',
+							'width' => 200,
 						),
+						'attr' => array('elem_class' => 'portfolio_image_1'),
 					),
 					array(
 						'name' => 'image_extra',
 						'type' => 'special_image',
 						'label' => 'Imagem extra',
 						'options' => array(
-							'layout' => 'compact',
-							'width' => false,
+							'image_size' => 'large',
+							'layout' => 'row',
+							'width' => 200,
 						),
+						'attr' => array('elem_class' => 'portfolio_image_2'),
+					),
+					array(
+						'name' => 'border',
+						'type' => 'checkbox',
+						'label' => 'Bordas arredondadas',
+						'input_helper' => 'com bordas arredondadas',
+						'attr' => array('elem_class' => 'portfolio_image_border'),
+					),
+					array(
+						'name' => 'video',
+						'type' => 'text',
+						'size' => 'medium',
+						'label' => 'Endereço do vídeo <small>(opcional)</small>',
+						'input_helper' => 'Não esquecer do <code>http://</code>',
+						'attr' => array('elem_class' => 'portfolio_video_1'),
+					),
+					array(
+						'name' => 'video_extra',
+						'type' => 'text',
+						'size' => 'medium',
+						'label' => 'Endereço do vídeo extra<small>(opcional)</small>',
+						'input_helper' => 'Não esquecer do <code>http://</code>',
+						'attr' => array('elem_class' => 'portfolio_video_2'),
 					),
 					array(
 						'name' => 'align',
 						'type' => 'radio',
-						'label' => 'Alinhamento da imagem',
+						'label' => 'Alinhamento da imagem/vídeo',
 						'std' => 'left',
 						'options' => array(
 							'separator' => ' ',
@@ -53,18 +96,14 @@ function my_meta_boxes(){
 								'full' => 'Coluna cheia',
 							),
 						),
-					),
-					array(
-						'name' => 'border',
-						'type' => 'checkbox',
-						'label' => 'Bordas arredondadas',
-						'input_helper' => 'com bordas arredondadas',
+						'attr' => array('elem_class' => 'portfolio_align'),
 					),
 					array(
 						'name' => 'desc',
 						'type' => 'textarea_editor',
 						'size' => 'full',
-						'label' => 'Texto',
+						//'label' => 'Texto <small><label><input type="checkbox" class="sub-control-checkbox-desc" />mostrar editor</label></small>',
+						'label' => '',
 						'options' => array(
 							'editor' => array(
 								'toolbar' => 'formatselect bold italic link bullist numlist alignleft aligncenter alignright undo redo image charmap code',
@@ -72,6 +111,7 @@ function my_meta_boxes(){
 								'buttons2' => '',
 							),
 						),
+						'attr' => array('elem_class' => 'portfolio_desc'),
 					),
 				)
 			),
@@ -132,7 +172,38 @@ function my_meta_boxes(){
 		)
 	);
 	
+	
+	$meta_boxes[] = array(
+		'id' => 'post_special_image_box', 
+		'title' => 'Imagem do Post', 
+		'post_type' => array('portfolio'), 
+		'context' => 'side', 
+		'priority' => 'default',
+		'help' => 'Você poderá enviar uma nova imagem ou escolher entre as imagens deste post ou uma da biblioteca.',
+		'itens' => array(
+			array(
+				'name' => '_thumbnail_id',
+				'type' => 'special_image',
+				'layout' => 'block',
+				'options' => array(
+					'image_size' => 'large',
+					'layout' => 'compact',
+					'width' => 264,
+				),
+			),
+		)
+	);
+	
 	$my_meta_boxes = new BorosMetaBoxes( $meta_boxes );
+}
+
+add_filter( 'boros_form_element_work_description_desc_label', 'work_description_desc_label', 10, 2 );
+function work_description_desc_label( $label, $obj ){
+	$parent_values = get_post_meta($obj->context['post_id'], $obj->context['parent'], true);
+	$name = str_replace('[desc]', '[desc_status]', $obj->data['name']);
+	$checked = isset($parent_values[$obj->data['index']]['desc_status']) ? ' checked="checked"' : '';
+	$label = "<span class='non_click_label'>Texto <small><label><input type='checkbox' class='sub-control-checkbox-desc' name='{$name}' {$checked} />mostrar editor</label></small></span>";
+	return $label;
 }
 
 /* ========================================================================== */
@@ -153,9 +224,8 @@ function remove_custom_meta_boxes( $post_type, $context, $post ){
 	//pre($wp_meta_boxes);
 	
 	$removes = array(
-		'post' => array(
+		'portfolio' => array(
 			'postimagediv',
-			'categorydiv',
 		),
 	);
 	
