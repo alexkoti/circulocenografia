@@ -33,16 +33,15 @@ function section_content(){
 		),
 	);
 	$args[] = array(
-		'id' => 'site_options_post_format',
-		'title' => 'Formatação',
-		'desc' => 'Opções padrão de elementos visuais',
+		'id' => 'site_options_footer',
+		'title' => 'Rodapé',
+		//'desc' => 'Texto do rodapé',
 		'block' => 'section',
 		'itens' => array(
 			array(
-				'name' => 'post_default_image',
-				'type' => 'special_image',
-				'label' => 'Imagem padrão para os posts',
-				'label_helper' => 'Será usado quando não existir a imagem de destaque do conteúdo',
+				'name' => 'site_footer_text',
+				'type' => 'wp_editor',
+				'label' => 'Texto do rodapé',
 			),
 		),
 	);
