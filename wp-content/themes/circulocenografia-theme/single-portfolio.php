@@ -14,17 +14,17 @@
 					the_post();
 					$thumb = get_post_meta($post->ID, '_thumbnail_id', true);
 					$thumb_src = wp_get_attachment_image_src($thumb, 'column_full');
+					$categories = wp_get_object_terms($post->ID, 'portfolio_category');
+					$back_link = add_query_arg( array('categoria' => $categories[0]->slug), get_post_type_archive_link('portfolio') );
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class('single-portfolio-content'); ?>>
+				<p class="back-link"><a href="<?php echo $back_link; ?>" class="btn btn-default">« voltar para <?php echo $categories[0]->name; ?></a></p>
+				<h1><?php the_title(); ?></h1>
 				<div class="entry_content">
 					<?php
 					$description = get_post_meta($post->ID, 'work_description', true); //pre($description);
 					$i = 1;
 					foreach( $description as $desc ){
-						$title = '';
-						if( $i == 1 ){
-							$title = '<h1>' . get_the_title($post->ID) . '</h1>';
-						}
 						$image_size = ($desc['align'] == 'full') ? 'large' : 'medium';
 						$img_src = wp_get_attachment_image_src($desc['image'], $image_size);
 						
@@ -38,10 +38,6 @@
 					?>
 					<div class="<?php echo $class; ?>">
 						<?php
-						if( $desc['align'] != 'full' and empty($desc['image_extra']) ){
-							echo $title;
-						}
-						
 						if( isset($desc['video']) and !empty($desc['video']) ){
 							echo "<div class='portfolio-video video-align-{$desc['align']}'>";
 							echo apply_filters('the_content', $desc['video']);
@@ -55,10 +51,10 @@
 						elseif( !empty($desc['image']) and !empty($img_src) ){
 							if( !empty($desc['image_extra']) ){
 								$img_extra_src = wp_get_attachment_image_src($desc['image_extra'], 'medium');
-								echo "<div class='item-image extra-image'>{$title}<img src='{$img_src[0]}' alt='' class='image-half image-half-left' /><img src='{$img_extra_src[0]}' alt='' class='image-half image-half-right' /></div>";
+								echo "<div class='item-image extra-image'><img src='{$img_src[0]}' alt='' class='image-half image-half-left' /><img src='{$img_extra_src[0]}' alt='' class='image-half image-half-right' /></div>";
 							}
 							elseif( $desc['align'] == 'full' ){
-								echo "<div class='item-image'>{$title}<img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></div>";
+								echo "<div class='item-image'><img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></div>";
 							}
 							else{
 								echo "<div class='item-image'><img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></div>";
@@ -91,6 +87,7 @@
 					</ul>
 				</div>
 				<?php } ?>
+				<p class="back-link"><a href="<?php echo $back_link; ?>" class="btn btn-default">« voltar para <?php echo $categories[0]->name; ?></a></p>
 			</article>
 			<?php
 				}

@@ -136,6 +136,7 @@ function add_frontend_scripts(){
 	$js->jquery('photoswipe.min', 'libs');
 	$js->jquery('photoswipe-ui-default.min', 'libs');
 	$js->jquery('owl.carousel.min', 'libs');
+	$js->jquery('jquery.history', 'libs');
 	$js->jquery('functions');
 	//$js->add('modernizr', 'libs', false, false);
 	//$js->add('html5', 'libs', false, false);

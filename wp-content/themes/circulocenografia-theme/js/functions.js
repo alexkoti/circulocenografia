@@ -33,19 +33,30 @@ jQuery(document).ready(function($){
 	 * 
 	 */
 	$('#portfolio-submenu .category-link, #portfolio-categories-list .portfolio-item-link').on('click', function(){
-		if( $(this).is('.category-link') ){
-			var link = $(this);
+		portfolio_menu( $(this), false );
+	});
+	
+	function portfolio_menu( btn, in_history ){
+		var title = btn.text();
+		
+		// link pode o link para a inicial de categorias ou para uma categoria individual
+		if( btn.is('.category-link') ){
+			// lista de categorias
+			var link = btn;
 		}
 		else{
-			var link = $('#' + $(this).attr('data-related-menu-link'));
+			// itens de determinada categoria
+			var link = $('#' + btn.attr('data-related-menu-link'));
 		}
 		
-		var target = $(this).attr('data-target');
-		var active = $('#portfolio-box .active');
-		//console.log(active);
-		//console.log(target);
+		var target = btn.attr('data-target'); // target do link
+		var hstate = btn.attr('data-hstate'); // history state slug do link
+		var cstate = btn.attr('id'); // history state id do link
+		var active = $('#portfolio-box .active'); // categoria exibindo agora
 		
+		// caso o target do link ainda não esteja visível nos círculos, mostrar, caso contrário não faz nada.
 		if( active.attr('id') != target ){
+			console.log(1);
 			active.fadeOut(400, function(){
 				$('#portfolio-box .portfolio-category').removeClass('active');
 				$('#'+target).fadeIn(400, function(){
@@ -54,28 +65,59 @@ jQuery(document).ready(function($){
 			});
 		}
 		
+		// caso algum sub-menu esteja visível, verificar se é o mesmo do clicado
 		if( $('#portfolio-submenu .portfolio-category-items:visible').length ){
 			var ul = link.closest('.portfolio-category-menu-item').find('.portfolio-category-items');
+			// é o mesmo que já está ativado, não fazer nada
 			if( ul.is(':visible') ){
+				console.log(21);
 				return;
 			}
+				console.log(22);
+			// esconder todos os ativos e mostrar o desejado
 			$('#portfolio-submenu .portfolio-category-items').slideUp({
 				duration : 400, 
 				queue : false,
 				complete : function(){
 					link.closest('.portfolio-category-menu-item').find('.portfolio-category-items').slideDown();
+					// adicionar um item do histórico
+					if( in_history == false ){
+						History.pushState( {cstate:cstate}, title, '?categoria=' + hstate);
+					}
 				}
 			});
 		}
 		else{
+			console.log(3);
+			// está tudo fechado, abrir diretamente o desejado
 			link.closest('.portfolio-category-menu-item').find('.portfolio-category-items').slideDown();
+			// adicionar um item do histórico
+			if( in_history == false ){
+				History.pushState( {cstate:cstate}, title, '?categoria=' + hstate);
+			}
 		}
+		
 		// esconder o menu após o click apenas se for a página porfolio
 		if( $('body').is('.item-name-portfolio') ){
 			$('.row-offcanvas, html, body').removeClass('active');
 		}
-	});
+	}
 	
+	History.Adapter.bind(window, 'statechange', function(){
+		var State = History.getState();
+		
+		if( typeof State.data.cstate != 'undefined' ){
+			portfolio_menu( $('#' + State.data.cstate), true );
+		}
+		else{
+			portfolio_menu( $('#portfolio-categories-list-all'), true );
+		}
+		
+		//$.each(State.data.clips, function(key, val){
+		//	$(key).replaceWith(val);
+		//});
+		//History.log(State.data, State.title, State.url);
+	});
 	
 	
 	/**

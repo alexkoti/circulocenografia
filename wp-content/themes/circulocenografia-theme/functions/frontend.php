@@ -54,37 +54,20 @@ function footer_google_analytics(){
  */
 //add_filter( 'pre_get_posts', 'filter_pre_get_posts' );
 function filter_pre_get_posts( $query ){
-	$page_on_front = get_option('page_on_front');
-	if( $query->query_vars['page_id'] == $page_on_front ){
-		return $query;
-	}
 	
-	// definir a quantidade de posts padrão em chamadas de query_posts() e WP_Query() na frontpage. Sobrepõem qualquer definição das funções.
-	if( is_front_page() ){
-		$query->query_vars['posts_per_page'] = 3;
-	}
-	
-	// definir a quantidade de posts padrão na home(home de posts)
-	if( is_home() ){
-		$query->query_vars['posts_per_page'] = 2;
-	}
-	
-	// posts per page em fábrica de ideias
-	if(
-		(isset($wp_query->query_vars['post_type']) and $wp_query->query_vars['post_type'] == 'ideia') OR 
-		(isset($wp_query->query_vars['taxonomy']) and $wp_query->query_vars['taxonomy'] == 'category-ideias')
-	){
-		if( $wp_query->is_single != true )
-			$query->query_vars['posts_per_page'] = 14;
-	}
-	
-	// remover vídeos da listagem normal de blogs
-	if( !is_front_page() ){
-		if ( isset($query->category_name) and $query->category_name != 'videos' AND $wp_query->is_admin == false ) {
-			$exclude = get_cat_ID('videos');
-			$query->set('cat', '-'.$exclude);
-		}
-	}
+	if ( !is_admin() && $query->is_search ) {
+		$query->set( 'post_type', array( 'post', 'page', 'portfolio' ) );
+		$query->set( 's', false );
+		$query->set('meta_query', array(
+			array(
+				'key' => 'lala',
+				'value' => $query->query_vars['s'],
+				'compare' => 'LIKE'
+			)
+		));
+		//$query->set('post_type', '__your_post_type__'); // optional
+		//pre($query);
+	};
 
 	return $query;
 }

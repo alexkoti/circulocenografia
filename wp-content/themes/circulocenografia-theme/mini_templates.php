@@ -32,6 +32,7 @@ function circle_get_portfolio_category_transient(){
 			$portfolio_menu[posts][$cat->term_id] = array(
 				'term_id' => $cat->term_id,
 				'name' => $cat->name,
+				'slug' => $cat->slug,
 				'posts' => array(),
 			);
 			$args = array(

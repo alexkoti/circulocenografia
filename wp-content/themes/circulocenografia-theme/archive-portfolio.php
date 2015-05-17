@@ -7,7 +7,16 @@
 		</div>
 		<div class="col-md-9 col-sm-8 col-xs-12" id="offcanvas-content">
 			<div id="portfolio-box">
-				<div class="portfolio-category active" id="portfolio-categories-list">
+				<?php
+				// verificar se a categoria foi definida por url query
+				$category_active = false;
+				$all_cats_class = 'active';
+				if( isset($_GET['categoria']) ){
+					$category_active = $_GET['categoria'];
+					$all_cats_class = '';
+				}
+				?>
+				<div class="portfolio-category <?php echo $all_cats_class; ?>" id="portfolio-categories-list">
 					<ul class="portfolio-category-items row">
 					<?php
 					$i = 1;
@@ -21,7 +30,7 @@
 						else{
 							$img = "<img src='".CSS_IMG."/cat-placeholder.jpg' alt='' class='img-responsive' />";
 						}
-						echo "<li class='col-md-4 col-sm-4 col-xs-6'><div class='portfolio-item-content'>{$img}<div class='portfolio-item-title'>{$cat->name}</div><span class='portfolio-item-link' data-target='portfolio-category-{$cat->term_id}' data-related-menu-link='portfolio-link-category-{$cat->term_id}'></span></div></li>";
+						echo "<li class='col-md-4 col-sm-4 col-xs-6'><div class='portfolio-item-content'>{$img}<div class='portfolio-item-title'>{$cat->name}</div><span class='portfolio-item-link' id='portfolio-category-circles-{$cat->term_id}' data-target='portfolio-category-{$cat->term_id}' data-related-menu-link='portfolio-link-category-{$cat->term_id}' data-hstate='{$cat->slug}'></span></div></li>";
 						//if( $i % 4 == 0 ){ echo '<li class="circle-divider divider-4 col-md-12 visible-lg-block visible-md-block"></li>'; }
 						if( $i % 3 == 0 ){ echo '<li class="circle-divider divider-3 col-xs-12 visible-sm-block"></li>'; }
 						if( $i % 2 == 0 ){ echo '<li class="circle-divider divider-2 col-xs-12 visible-xs-block"></li>'; }
@@ -52,8 +61,12 @@
 					);
 					$items = new WP_Query($args);
 					if( $items->posts ){
+						$class = 'portfolio-category';
+						if( $category_active == $cat->slug ){
+							$class = 'portfolio-category active';
+						}
 						$i = 1;
-						echo "<div class='portfolio-category' id='portfolio-category-{$cat->term_id}'><ul class='portfolio-category-items row'>";
+						echo "<div class='{$class}' id='portfolio-category-{$cat->term_id}'><ul class='portfolio-category-items row'>";
 						foreach( $items->posts as $post ){
 							$img = '';
 							$thumb = get_post_meta($post->ID, '_thumbnail_id', true);
