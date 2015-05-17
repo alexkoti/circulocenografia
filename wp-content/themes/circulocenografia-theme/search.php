@@ -6,31 +6,68 @@
  */
 
 get_header(); ?>
-		
-		<div id="column">
-			<?php boros_breadcrumb(); ?>
+
+<div class="container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-md-3 col-sm-4 col-xs-6 sidebar-offcanvas" id="offcanvas-sidebar">
+			<?php get_template_part('menu-lateral'); ?>
+		</div>
+		<div class="col-md-9 col-sm-8 col-xs-12" id="offcanvas-content">
 			<h1>Resultados da busca para <strong><?php echo get_search_query(); ?></strong></h1>
+			<?php if (have_posts()){ ?>
 			
+			<div class="row search-results">
 			<?php
-			/**
-			 * Caso tenha posts para exibir
-			 * 
-			 */
-			if (have_posts()){
-				custom_content_nav( 'nav_above' );
-				while (have_posts()){
-					the_post();
-					get_template_part( 'content', 'list' );
-				}
-				custom_content_nav( 'nav_below' );
-			}
-			/**
-			 * Sem resultados
-			 * IMPORTANTE: isso não é exatamente a mesma coisa que o 404 not found(este possui template próprio), é aplicado à uma requisição válida porém sem resultados
-			 * conforme o contexto, por exemplo listagem de posts na página 999, onde não existem mais posts para exibir.
-			 */
-			 else {
-				?>
+			$search_term = esc_attr(apply_filters('the_search_query', get_search_query()));
+			while (have_posts()){
+				the_post();
+				$link = get_permalink();
+			?>
+				<div class="col-md-12 search-result-item">
+					<div class="row">
+						<h2 class="col-md-12"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h2>
+						<?php
+						if( in_array($post->post_type, array('post', 'page')) ){
+							echo '<div class="col-md-12">';
+							the_excerpt();
+							echo '</div>';
+						}
+						elseif( $post->post_type == 'portfolio' ){
+							$work_description = get_post_meta($post->ID, 'work_description', true); 
+							$thumb = get_post_meta($post->ID, '_thumbnail_id', true);
+							if( !empty($thumb) ){
+								$thumb_src = wp_get_attachment_image_src($thumb, 'post-thumbnail');
+								echo "<a href='{$link}' class='search-result-thumb col-md-3'><img src='{$thumb_src[0]}' alt='' class='img-responsive' /></a>";
+							}
+							echo '<div class="col-md-9">';
+							// tentar achar uma das descrições com o termo
+							$find = false;
+							foreach( $work_description as $desc ){
+								// fazer a busca do termo em lowercase
+								if( strpos(strtolower($desc['desc']), strtolower($search_term)) !== false ){
+									echo apply_filters('the_content', $desc['desc']);
+									$find = true;
+								}
+							}
+							// caso não tenha encontrado nas descrições, mostrar o primeiro bloco
+							if( $find == false ){
+								$show = false;
+								foreach( $work_description as $desc ){
+									if( !empty($desc['desc']) and $show == false ){
+										echo apply_filters('the_content', $desc['desc']);
+										$show = true;
+										continue;
+									}
+								}
+							}
+							echo '</div>';
+						}
+						?>
+					</div>
+				</div>
+			<?php } ?>
+			</div>
+			<?php } else { ?>
 				<article class="post hentry no-results not-found">
 					<header class="entry_header">
 						<h2>Sem resultados</h2>
@@ -40,11 +77,9 @@ get_header(); ?>
 					</div>
 				</article>
 				<?php
-			 }
+			}
 			?>
-			
-		</div><!-- .column -->
-		
-		<?php get_sidebar(); ?>
-		
+		</div>
+	</div>
+</div>
 <?php get_footer() ?>
