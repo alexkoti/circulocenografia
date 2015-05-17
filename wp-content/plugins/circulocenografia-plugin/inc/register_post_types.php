@@ -140,6 +140,7 @@ function register_post_types(){
 		'columns' => array(
 			'cb' => '<input type="checkbox" />',
 			'title' => 'Título',
+			'terms_portfolio_category' => 'Categorias',
 			'thumb' => 'Imagem',
 			'date' => 'Data',
 		)
