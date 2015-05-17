@@ -102,8 +102,7 @@ function my_meta_boxes(){
 						'name' => 'desc',
 						'type' => 'textarea_editor',
 						'size' => 'full',
-						//'label' => 'Texto <small><label><input type="checkbox" class="sub-control-checkbox-desc" />mostrar editor</label></small>',
-						'label' => '',
+						'label' => 'Texto <small><label><input type="checkbox" class="sub-control-checkbox-desc" />mostrar editor</label></small>',
 						'options' => array(
 							'editor' => array(
 								'toolbar' => 'formatselect bold italic link bullist numlist alignleft aligncenter alignright undo redo image charmap code',
