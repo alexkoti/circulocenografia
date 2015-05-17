@@ -2,7 +2,11 @@
 
 <footer class="footer">
 	<div class="container">
-		<p>rodapé</p>
+		<div class="row">
+			<div class="col-md-12">
+				<?php opt_option('site_footer_text', '%s', true, 'the_content'); ?>
+			</div>
+		</div>
 	</div>
 </footer>
 
