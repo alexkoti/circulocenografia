@@ -160,15 +160,21 @@ function photo_swipe_box(){
  */
 add_filter( 'get_search_form', 'custom_search_form' );
 function custom_search_form( $form ) {
+	return circulo_search_form();
+}
+
+function circulo_search_form( $id = 'form-search', $class = 'form-search' ){
 	$query = esc_attr(apply_filters('the_search_query', get_search_query()));
 	$value = ( $query == '' ) ? '' : $query;
 	
-	$form = '
-	<form method="get" id="searchform" action="' . home_url() . '/" >
-		<label for="search_term">Busca</label>
-		<input type="text" value="' . $value. '" id="search_term" class="ipt_search_text" name="s" placeholder="Procure no site" />
-		<input type="submit" class="ipt_search_submit" id="searchsubmit" value="ok" />
-	</form>';
+	$form = "<form class='{$class}' id='{$id}' role='search' action='" . home_url('/') . "'>";
+	$form .= '<div class="input-group">';
+	$form .= "<input type='text' class='form-control' placeholder='Busca' name='s' value='{$value}'>";
+	$form .= '<div class="input-group-btn">';
+	$form .= '<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>';
+	$form .= '</div>';
+	$form .= '</div>';
+	$form .= '</form>';
 	return $form;
 }
 

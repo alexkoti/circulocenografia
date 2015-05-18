@@ -10,16 +10,15 @@
 
 $queried = $wp_query->get_queried_object();
 get_header(); ?>
-		
-		<div id="column">
-			<?php boros_breadcrumb(); ?>
+
+<div class="container">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-md-3 col-sm-4 col-xs-6 sidebar-offcanvas" id="offcanvas-sidebar">
+			<?php get_template_part('menu-lateral'); ?>
+		</div>
+		<div class="col-md-9 col-sm-8 col-xs-12" id="offcanvas-content">
 			<h3>Categoria <strong><?php echo $queried->name; ?></strong></h3>
-			
 			<?php
-			/**
-			 * Caso tenha posts para exibir
-			 * 
-			 */
 			if (have_posts()){
 				custom_content_nav( 'nav_above' );
 				while (have_posts()){
@@ -29,9 +28,7 @@ get_header(); ?>
 				custom_content_nav( 'nav_below' );
 			}
 			?>
-			
-		</div><!-- .column -->
-		
-		<?php get_sidebar(); ?>
-		
+		</div>
+	</div>
+</div>
 <?php get_footer() ?>

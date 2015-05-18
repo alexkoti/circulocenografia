@@ -13,7 +13,7 @@ get_header(); ?>
 			<?php get_template_part('menu-lateral'); ?>
 		</div>
 		<div class="col-md-9 col-sm-8 col-xs-12" id="offcanvas-content">
-			<h1>Resultados da busca para <strong><?php echo get_search_query(); ?></strong></h1>
+			<h2>Resultados da busca para <strong><?php echo get_search_query(); ?></strong></h2>
 			<?php if (have_posts()){ ?>
 			
 			<div class="row search-results">
@@ -25,7 +25,7 @@ get_header(); ?>
 			?>
 				<div class="col-md-12 search-result-item">
 					<div class="row">
-						<h2 class="col-md-12"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h2>
+						<h3 class="col-md-12"><a href="<?php echo $link; ?>"><?php the_title(); ?></a></h3>
 						<?php
 						if( in_array($post->post_type, array('post', 'page')) ){
 							echo '<div class="col-md-12">';
@@ -65,7 +65,10 @@ get_header(); ?>
 						?>
 					</div>
 				</div>
-			<?php } ?>
+			<?php
+			}
+			custom_content_nav( 'nav_below' );
+			?>
 			</div>
 			<?php } else { ?>
 				<article class="post hentry no-results not-found">

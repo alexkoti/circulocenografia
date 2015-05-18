@@ -17,9 +17,8 @@
 					$categories = wp_get_object_terms($post->ID, 'portfolio_category');
 					$back_link = add_query_arg( array('categoria' => $categories[0]->slug), get_post_type_archive_link('portfolio') );
 			?>
-			<article id="post-<?php the_ID(); ?>" <?php post_class('single-portfolio-content'); ?>>
-				<p class="back-link"><a href="<?php echo $back_link; ?>" class="btn btn-default">« voltar para <?php echo $categories[0]->name; ?></a></p>
-				<h1><?php the_title(); ?></h1>
+			<article id="post-<?php the_ID(); ?>" <?php post_class('single-portfolio-content clearfix'); ?>>
+				<h1><?php the_title(); ?> <span class="back-link"><a href="<?php echo $back_link; ?>" class="btn btn-default btn-sm">« voltar</a></span></h1>
 				<div class="entry_content">
 					<?php
 					$description = get_post_meta($post->ID, 'work_description', true); //pre($description);
@@ -84,10 +83,10 @@
 						echo "<a href='{$photo_large_src[0]}' target='_blank' class='gallery-link' data-sizes='{$photo_large_src[1]}x{$photo_large_src[2]}'><img src='{$photo_src[0]}' alt='{$photo['caption']}' class='img-responsive' /></a>";
 					}
 					?>
-					</ul>
+					</div>
 				</div>
 				<?php } ?>
-				<p class="back-link"><a href="<?php echo $back_link; ?>" class="btn btn-default">« voltar para <?php echo $categories[0]->name; ?></a></p>
+				<span class="back-link"><a href="<?php echo $back_link; ?>" class="btn btn-default btn-sm">« voltar</a></span>
 			</article>
 			<?php
 				}

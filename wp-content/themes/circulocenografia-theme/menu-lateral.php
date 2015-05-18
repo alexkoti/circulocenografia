@@ -2,18 +2,7 @@
 			<nav id="offcanvas" class="menu-sidebar-container">
 				<ul id="menu-sidebar" class="menu-offcanvas">
 					<li class="visible-xs">
-						<?php
-						$query = esc_attr(apply_filters('the_search_query', get_search_query()));
-						$value = ( $query == '' ) ? '' : $query;
-						?>
-						<form class="sidebar-search" id="sidebar-search" role="search" action="<?php echo home_url('/'); ?>">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Busca" name="s" value="<?php echo $value; ?>">
-								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-								</div>
-							</div>
-						</form>
+						<?php echo circulo_search_form('sidebar-search', 'sidebar-search'); ?>
 					</li>
 					<?php formatted_page_link(array('page_name' => 'inicio', 'list' => true)); ?>
 					<?php formatted_page_link(array('page_name' => 'nos', 'list' => true)); ?>
@@ -97,9 +86,10 @@
 						}
 						?>
 					</li>
-					<?php formatted_post_type_link(array('post_type' => 'clipping', 'list' => true)); ?>
+					<?php formatted_post_type_link(array('post_type' => 'clipping', 'text' => 'Na Mídia', 'list' => true)); ?>
 					<?php formatted_post_type_link(array('post_type' => 'post', 'text' => 'Blog', 'list' => true)); ?>
 					<?php formatted_page_link(array('page_name' => 'projeto-cultural', 'list' => true)); ?>
+					<?php formatted_page_link(array('page_name' => 'clientes', 'list' => true)); ?>
 					<?php formatted_page_link(array('page_name' => 'contato', 'list' => true)); ?>
 				</ul>
 			</nav>

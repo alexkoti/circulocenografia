@@ -59,7 +59,26 @@ function circulo_custom_colors(){
 		$work_color_text = get_post_meta($post->ID, 'work_color_text', true);
 		
 		if( !empty($work_color_bg) and !empty($work_color_text) ){
-			echo "<style type='text/css'>body, #offcanvas-sidebar { background-color:{$work_color_bg}; color:{$work_color_text}; } #offcanvas a, #offcanvas ul li#portfolio-submenu .category-link { color:{$work_color_text}; }</style>";
+			$css = array(
+				'body, #offcanvas-sidebar' => array(
+					'background-color' => $work_color_bg,
+					'color'            => $work_color_text,
+				),
+				'#offcanvas a, #offcanvas ul li#portfolio-submenu .category-link' => array(
+					'color' => $work_color_text,
+				),
+				'.back-link .btn' => array(
+					'color'        => $work_color_text,
+					'border-color' => $work_color_text,
+				),
+				'.back-link .btn:hover' => array(
+					'background-color' => boros_color_hex_to_rgba($work_color_text, 0.3),
+				),
+				'.footer .menu-footer li a' => array(
+					'color' => $work_color_text
+				),
+			);
+			boros_print_css($css);
 		}
 	}
 }

@@ -446,15 +446,12 @@ html.active, body.active {
 	width:100%;
 }
 .back-link {
-	margin:10px 0;
+	float:right;
 }
 .back-link .btn {
-	background:rgba(255,255,255,0.8);
-	text-shadow:
-	 -1px -1px 1px #fff,  
-	  1px -1px 1px #fff,
-	  -1px 1px 1px #fff,
-	   1px 1px 1px #fff;
+	background:transparent;
+	font-size:12px;
+	margin-bottom:6px;
 }
 
 /* video responsivo */
@@ -600,7 +597,6 @@ html.active, body.active {
 .footer {
 	border-top:1px solid #ccc;
 	margin:20px 0 0;
-	padding:10px 0;
 }
 .footer .menu-footer {
 	margin:10px 0;
@@ -609,7 +605,11 @@ html.active, body.active {
 }
 .footer .menu-footer li {
 	display:inline-block;
+	font-size:18px;
 	margin:0 5px;
+}
+.footer .menu-footer li a:hover {
+	color:#ED1C24;
 }
 
 

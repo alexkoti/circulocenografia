@@ -4,7 +4,6 @@
  */
 
 get_header(); ?>
-
 <div class="container">
 	<div class="row row-offcanvas row-offcanvas-left">
 		<div class="col-md-3 col-sm-4 col-xs-6 sidebar-offcanvas" id="offcanvas-sidebar">

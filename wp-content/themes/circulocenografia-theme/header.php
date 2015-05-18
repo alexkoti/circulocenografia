@@ -59,18 +59,7 @@ wp_head();
 		</div>
 		
 		<div id="menu-top-secondary" class="hidden-xs" aria-expanded="true">
-			<?php
-			$query = esc_attr(apply_filters('the_search_query', get_search_query()));
-			$value = ( $query == '' ) ? '' : $query;
-			?>
-			<form class="navbar-form navbar-right" id="header-search" role="search" action="<?php echo home_url('/'); ?>">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Busca" name="s" value="<?php echo $value; ?>">
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-					</div>
-				</div>
-			</form>
+			<?php echo circulo_search_form('header-search', 'navbar-form navbar-right'); ?>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="<?php page_permalink_by_name('blog');  ?>">Blog</a></li>
 				<li><a href="<?php page_permalink_by_name('contato');  ?>" title="Contato"><i class="glyphicon glyphicon-envelope"></i></a></li>

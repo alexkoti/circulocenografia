@@ -98,7 +98,7 @@ jQuery(document).ready(function($){
 		}
 		
 		// esconder o menu após o click apenas se for a página porfolio
-		if( $('body').is('.item-name-portfolio') ){
+		if( $('body').is('.post-type-archive-portfolio') ){
 			$('.row-offcanvas, html, body').removeClass('active');
 		}
 	}

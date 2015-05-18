@@ -12,6 +12,7 @@ get_header(); ?>
 			<?php get_template_part('menu-lateral'); ?>
 		</div>
 		<div class="col-md-9 col-sm-8 col-xs-12" id="offcanvas-content">
+			<h1>Blog</h1>
 			<?php
 			/**
 			 * Caso tenha posts para exibir
