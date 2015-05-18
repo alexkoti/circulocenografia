@@ -4,7 +4,7 @@
  * ==================================================
  * 
  * vermelho #ED1C24
- * 
+ * vermelho light: rgba(237, 27, 36, 0.6)
  * 
  * 
  */
@@ -111,6 +111,9 @@ body {
 }
 #offcanvas {
 	padding:0 0 0 10px;
+}
+#offcanvas a.active {
+	color:#ED1C24;
 }
 #offcanvas ul {
 	font-size:16px;
@@ -442,6 +445,17 @@ html.active, body.active {
 	margin:0 auto;
 	width:100%;
 }
+.back-link {
+	margin:10px 0;
+}
+.back-link .btn {
+	background:rgba(255,255,255,0.8);
+	text-shadow:
+	 -1px -1px 1px #fff,  
+	  1px -1px 1px #fff,
+	  -1px 1px 1px #fff,
+	   1px 1px 1px #fff;
+}
 
 /* video responsivo */
 .videoWrapper {
@@ -515,13 +529,87 @@ html.active, body.active {
 
 
 /**
- * Footer
+ * BUSCA
+ * 
+ */
+.search-result-item {
+	position:relative;
+}
+
+
+/**
+ * Blog
+ * 
+ */
+.pagination>.active>a, 
+.pagination>.active>a:focus, 
+.pagination>.active>a:hover, 
+.pagination>.active>span, 
+.pagination>.active>span:focus, 
+.pagination>.active>span:hover {
+	background:#ED1C24;
+	border-color:#ED1C24;
+	color:#fff;
+}
+.pagination>li>a:focus, 
+.pagination>li>a:hover, 
+.pagination>li>span:focus, 
+.pagination>li>span:hover {
+	background:rgba(237, 27, 36, 0.6);
+	border-color:#ED1C24;
+	color:#fff;
+}
+.pagination>li>a, 
+.pagination>li>span {
+	border-color:#ED1C24;
+	color:#ED1C24;
+}
+.post_meta {
+	font-style:italic;
+}
+#comments {
+	border-top:1px solid #ccc;
+	margin:20px 0 0;
+}
+#comments > ol {
+	margin:0;
+}
+#comments > ol > li {
+	border-bottom:1px solid #ccc;
+	overflow:hidden;
+}
+#comments .comment-meta {
+	float:right;
+	font-size:13px;
+	padding-bottom:10px;
+}
+.comment-author {
+	overflow:hidden;
+	position:relative;
+}
+.comment-author img {
+	float:left;
+	margin:0 10px 0 0;
+}
+
+
+/**
+ * FOOTER
  * 
  */
 .footer {
 	border-top:1px solid #ccc;
 	margin:20px 0 0;
 	padding:10px 0;
+}
+.footer .menu-footer {
+	margin:10px 0;
+	padding:0;
+	text-align:center;
+}
+.footer .menu-footer li {
+	display:inline-block;
+	margin:0 5px;
 }
 
 

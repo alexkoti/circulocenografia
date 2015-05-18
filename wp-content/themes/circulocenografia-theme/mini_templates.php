@@ -181,12 +181,6 @@ function custom_search_form( $form ) {
  */
 function post_meta_posted_on(){
 	global $post;
-	$author_data = array(
-		get_author_posts_url( get_the_author_meta( 'ID' ) ),
-		get_the_author()
-	);
-	$author = vsprintf('<span class="author vcard"><a class="url fn n" href="%1$s" title="Ver todos os posts de %2$s">%2$s</a>', $author_data );
-	
 	$date_data = array(
 		get_the_date('c'),
 		get_the_date(),
@@ -194,15 +188,16 @@ function post_meta_posted_on(){
 	$post_date = vsprintf('<time class="entry-date" datetime="%s" pubdate>%s</time>', $date_data );
 	?>
 	<div class="post_meta">
-		<p class="author_date">Publicado por <?php echo $author; ?> em <span class="post_date"><?php echo $post_date; ?></span></p>
-		<?php
-		// caso queira mostar apenas uma taxonomia, eleminar o foreach e usar apenas o boros_terms('taxonomy_name').
-		$taxonomies = get_taxonomies('', 'objects');
-		foreach( $taxonomies as $taxonomy ){
-			echo boros_terms( $post->ID, $taxonomy->name, true, "<p class='taxonomy_terms terms_{$taxonomy->name}'>{$taxonomy->label}: ", ' &gt; ', ', ', '</p>' );
-		}
-		?>
-		<p class="comment_status"></p>
+		<p class="author_date">
+			Publicado em <span class="post_date"><?php echo $post_date; ?></span> / Categorias: 
+			<?php
+			// caso queira mostar apenas uma taxonomia, eleminar o foreach e usar apenas o boros_terms('taxonomy_name').
+			$taxonomies = get_taxonomies('', 'objects');
+			foreach( $taxonomies as $taxonomy ){
+				echo boros_terms( $post->ID, $taxonomy->name, true, "<span class='taxonomy_terms terms_{$taxonomy->name}'>", ' &gt; ', ', ', '</span>' );
+			}
+			?>
+		</p>
 	</div>
 	<?php
 }
@@ -214,15 +209,29 @@ function post_meta_posted_on(){
  * 
  * @param string $nav_id - id HTML apenas para identificação
  */
-function custom_content_nav( $nav_id ) {
+function custom_content_nav( $nav_id = 'above' ) {
 	global $wp_query;
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+	$pagination_args = array(
+		'query_type' => 'normal',
+		'current' => $paged,
+		'total' => $wp_query->found_posts,
+		'posts_per_page' => $wp_query->query_vars['posts_per_page'],
+		'options' => array(
+			'num_pages' => 5,
+			'link_class' => '',
+		),
+	);
+	boros_pagination($pagination_args);
+}
 
-	if ( $wp_query->max_num_pages > 1 ) : ?>
-		<nav id="<?php echo $nav_id; ?>" class="contents_nav">
-			<div class="nav-previous"><?php next_posts_link( '&larr;  Anteriores' ); ?></div>
-			<div class="nav-next"><?php previous_posts_link( 'Recentes &rarr;' ); ?></div>
-		</nav><!-- #nav-above -->
-	<?php endif;
+function single_post_nav( $nav_id ) {
+	?>
+	<nav id="<?php echo $nav_id; ?>" class="navposts">
+		<span class="nav-previous"><?php previous_post_link( '%link', '<span class="page_item btn btn-default" title="%title">← anterior</span>' ); ?></span>
+		<span class="nav-next"><?php next_post_link( '%link', '<span class="page_item btn btn-default" title="%title">próximo →</span>' ); ?></span>
+	</nav>
+	<?php
 }
 
 /**

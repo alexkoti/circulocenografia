@@ -179,7 +179,7 @@ function register_post_types(){
 		'rewrite' => true,
 		'capability_type' => 'post',
 		'hierarchical' => false,
-		'has_archive' => false,
+		'has_archive' => 'cursos',
 		'menu_icon' => 'dashicons-welcome-learn-more',
 		//'show_in_menu' => 'edit.php?post_type=artigo',
 		'supports' => array(

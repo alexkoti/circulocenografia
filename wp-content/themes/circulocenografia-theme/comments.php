@@ -25,13 +25,12 @@
 				$paged_comments = true;
 			if( isset($paged_comments) && $paged_comments ){
 			?>
-			<div class="navigation">
-				<div class="nav-previous"><?php previous_comments_link( 'Comentários Antigos' ); ?></div>
-				<div class="nav-next"><?php next_comments_link( 'Comentários Recentes' ); ?></div>
-			</div> <!-- .navigation -->
+			<nav id="comment-nav-above" class="navigation" role="navigation">
+				<?php paginate_comments_links(); ?>
+			</nav> <!-- .navigation -->
 			<?php } ?>
 
-				<ol class="dl_list dl_list_comments">
+				<ol class="dl_list dl_list_comments list-unstyled">
 					<?php
 					// incluir modelo de comment single
 					include_once('comment.php');
@@ -43,10 +42,9 @@
 			// comments navigations below
 			if( isset($paged_comments) && $paged_comments ){
 			?>
-			<div class="navigation">
-				<div class="nav-previous"><?php previous_comments_link( 'Comentários Antigos' ); ?></div>
-				<div class="nav-next"><?php next_comments_link( 'Comentários Recentes' ); ?></div>
-			</div><!-- .navigation -->
+			<nav id="comment-nav-below" class="navigation" role="navigation">
+				<?php paginate_comments_links(); ?>
+			</nav><!-- .navigation -->
 			<?php } ?>
 
 		<?php } else { ?>
@@ -72,30 +70,31 @@ $email_field_value = ( !empty($commenter['comment_author_email']) ) ? esc_attr( 
 $comment_type = 'comentario';
 $fields =  array(
 	'simple_text'	=>	'<p>Seu e-mail não será publicado. Seu comentário poderá ser moderado.</p>',
-	'author'		=>	'<div id="comment-form-author" class="form_element form_element_text">
-							<input id="author" class="form_element_input required" name="author" type="text" value="' . $name_field_value . '" placeholder="Seu nome" size="30" />
+	'author'		=>	'<div class="form-group form_element form_element_text" id="comment-form-author">
 							<label for="author">Nome</label>
+							<input type="text" size="30" value="' . $name_field_value . '" name="author" class="form-control" id="author">
 						</div>',
-	'email'			=>	'<div id="comment-form-email" class="form_element form_element_text">
-							<input id="email" class="form_element_input required email" name="email" type="text" value="' . $email_field_value . '" placeholder="Seu email" size="30" />
-							<label for="email">E-mail</label>
+	'email'			=>	'<div class="form-group form_element form_element_text" id="comment-form-email">
+							<label for="email">E-mail (não será publicado)</label>
+							<input type="text" size="30" value="' . $email_field_value . '" name="email" class="form-control" id="email">
 						</div>',
-	'url'			=>	'<div class="form_element form_element_text comment-form-url">
-							<input id="url" class="form_element_input" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Site(opcional)" size="30" />
+	'url'			=>	'<div class="form-group form_element form_element_text comment-form-url">
 							<label for="url">Site</label>
+							<input type="text" size="30" value="' . esc_attr( $commenter['comment_author_url'] ) . '" name="url" class="form-control" id="url">
 						</div>',
 );
 
 $args = array(
 	'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
-	'comment_field'        => ' <div id="comment-form-message" class="form_element form_element_textarea">
-									<label for="comment">Comentário</label><br />
-									<textarea aria-required="true" rows="8" cols="45" name="comment" id="comment" class="ipt_textararea form_element_input required" placeholder="Digite sua mensagem aqui"></textarea>
+	'comment_field'        => '<div class="form-group form_element form_element_textarea" id="comment-form-message">
+									<label for="comment">Comentário</label><br>
+									<textarea placeholder="Digite sua mensagem aqui" class="form-control required" id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
 								</div>',
 	'comment_notes_before' => '',
 	'comment_notes_after'  => '',
 	'id_submit'            => 'comment_submit',
-	'label_submit'         => 'ok',
+	'class_submit'         => 'btn btn-default',
+	'label_submit'         => 'Enviar',
 );
 comment_form( $args );
 ?>

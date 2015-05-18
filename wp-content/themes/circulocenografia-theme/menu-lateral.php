@@ -97,8 +97,8 @@
 						}
 						?>
 					</li>
-					<?php formatted_page_link(array('page_name' => 'na-midia', 'list' => true)); ?>
-					<?php formatted_page_link(array('page_name' => 'blog', 'list' => true)); ?>
+					<?php formatted_post_type_link(array('post_type' => 'clipping', 'list' => true)); ?>
+					<?php formatted_post_type_link(array('post_type' => 'post', 'text' => 'Blog', 'list' => true)); ?>
 					<?php formatted_page_link(array('page_name' => 'projeto-cultural', 'list' => true)); ?>
 					<?php formatted_page_link(array('page_name' => 'contato', 'list' => true)); ?>
 				</ul>

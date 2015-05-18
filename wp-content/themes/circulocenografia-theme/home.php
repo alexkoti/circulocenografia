@@ -21,7 +21,7 @@ get_header(); ?>
 				custom_content_nav( 'nav_above' );
 				while (have_posts()){
 					the_post();
-					get_template_part( 'content' );
+					get_template_part( 'content', 'list' );
 				}
 				custom_content_nav( 'nav_below' );
 			}

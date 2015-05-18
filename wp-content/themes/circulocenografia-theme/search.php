@@ -37,7 +37,7 @@ get_header(); ?>
 							$thumb = get_post_meta($post->ID, '_thumbnail_id', true);
 							if( !empty($thumb) ){
 								$thumb_src = wp_get_attachment_image_src($thumb, 'post-thumbnail');
-								echo "<a href='{$link}' class='search-result-thumb col-md-3'><img src='{$thumb_src[0]}' alt='' class='img-responsive' /></a>";
+								echo "<div class='col-md-3'><a href='{$link}' class='search-result-thumb'><img src='{$thumb_src[0]}' alt='' class='img-responsive' /></a></div>";
 							}
 							echo '<div class="col-md-9">';
 							// tentar achar uma das descrições com o termo
