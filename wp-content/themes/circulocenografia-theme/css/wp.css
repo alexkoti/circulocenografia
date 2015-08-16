@@ -144,8 +144,16 @@ a img.aligncenter {
 .hentry .entry_content h4,
 .hentry .entry_content h5,
 .hentry .entry_content h6 {
-	
+	color:#666;
+	font-style:italic;
+	font-weight:normal;
 }
+.hentry .entry_content h1 {font-size:24px;}
+.hentry .entry_content h2 {font-size:20px;}
+.hentry .entry_content h3 {font-size:18px;}
+.hentry .entry_content h4 {font-size:16px;}
+.hentry .entry_content h5 {font-size:14px;}
+.hentry .entry_content h6 {font-size:12px;}
 
 .hentry .entry_content p {
 	line-height:18px;

@@ -14,8 +14,7 @@ get_header(); ?>
 			<?php get_template_part('menu-lateral'); ?>
 		</div>
 		<div class="col-md-9 col-sm-8 col-xs-12" id="offcanvas-content">
-			<img src="http://placehold.it/780x400" class="img-responsive" alt="" />
-			
+			Em construção
 			<?php
 			//if (have_posts()){
 			//	custom_content_nav( 'nav_above' );

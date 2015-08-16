@@ -88,6 +88,49 @@ function my_admin_pages_config(){
 
 /**
  * ==================================================
+ * POST TYPE ORDER ==================================
+ * ==================================================
+ * 
+ * 
+ */
+add_filter( 'cmspo_post_types', 'circulo_post_type_order' );
+function circulo_post_type_order( $post_types ) {
+	$post_types[] = 'curso';
+	$post_types[] = 'portfolio';
+	return $post_types;
+}
+
+add_action( 'cmspo_page_label', 'circulo_post_type_order_label', 10, 2 );
+function circulo_post_type_order_label( $label, $post_type ) {
+	if( 'curso' == $post_type ){
+		$label = 'Ordenar Cursos';
+	}
+	elseif( 'portfolio' == $post_type ){
+		$label = 'Ordenar Trabalhos';
+	}
+	elseif( 'page' == $post_type ){
+		$label = 'Ordenar Páginas';
+	}
+	return $label;
+}
+
+add_filter( 'the_title', 'circulo_portfolio_order_title', 10, 2 );
+function circulo_portfolio_order_title($post_title, $post_id){
+	global $page_hook;
+	if( $page_hook == 'portfolio_page_order-portfolio' ){
+		$terms = wp_get_post_terms($post_id, 'portfolio_category');
+		$terms_string = array();
+		foreach($terms as $t){
+			$terms_string[] = $t->name;
+		}
+		$terms_string = implode('][', $terms_string);
+		$post_title = "<small><em>[{$terms_string}]</em></small> {$post_title}";
+	}
+	return $post_title;
+}
+
+/**
+ * ==================================================
  * REMOVER PÁGINAS DO ADMIN =========================
  * ==================================================
  * 
