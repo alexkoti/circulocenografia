@@ -26,6 +26,7 @@
 					foreach( $description as $desc ){
 						$image_size = ($desc['align'] == 'full') ? 'large' : 'medium';
 						$img_src = wp_get_attachment_image_src($desc['image'], $image_size);
+						$img_large_src = wp_get_attachment_image_src($desc['image'], 'large');
 						
 						// class tipo de item
 						$class = "item-description item-type-{$desc['align']} clearfix";
@@ -50,13 +51,14 @@
 						elseif( !empty($desc['image']) and !empty($img_src) ){
 							if( !empty($desc['image_extra']) ){
 								$img_extra_src = wp_get_attachment_image_src($desc['image_extra'], 'medium');
-								echo "<div class='item-image extra-image'><img src='{$img_src[0]}' alt='' class='image-half image-half-left' /><img src='{$img_extra_src[0]}' alt='' class='image-half image-half-right' /></div>";
+								$img_extra_large_src = wp_get_attachment_image_src($desc['image_extra'], 'large');
+								echo "<div class='item-image extra-image'><a href='{$img_large_src[0]}' target='_blank' class='lightbox-link' data-sizes='{$img_large_src[1]}x{$img_large_src[2]}'><img src='{$img_src[0]}' alt='' class='image-half image-half-left' /></a><a href='{$img_extra_large_src}' target='_blank' class='gallery-link' data-sizes='{$img_extra_large_src[1]}x{$img_extra_large_src[2]}'><img src='{$img_extra_src[0]}' alt='' class='image-half image-half-right' /></a></div>";
 							}
 							elseif( $desc['align'] == 'full' ){
-								echo "<div class='item-image'><img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></div>";
+								echo "<div class='item-image'><a href='{$img_large_src[0]}' target='_blank' class='lightbox-link' data-sizes='{$img_large_src[1]}x{$img_large_src[2]}'><img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></a></div>";
 							}
 							else{
-								echo "<div class='item-image'><img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></div>";
+								echo "<div class='item-image'><a href='{$img_large_src[0]}' target='_blank' class='lightbox-link' data-sizes='{$img_large_src[1]}x{$img_large_src[2]}'><img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></a></div>";
 							}
 						}
 						
@@ -80,7 +82,7 @@
 					foreach( $gallery as $photo ){
 						$photo_src = wp_get_attachment_image_src($photo['image'], 'post-thumbnail');
 						$photo_large_src = wp_get_attachment_image_src($photo['image'], 'large');
-						echo "<a href='{$photo_large_src[0]}' target='_blank' class='gallery-link' data-sizes='{$photo_large_src[1]}x{$photo_large_src[2]}'><img src='{$photo_src[0]}' alt='{$photo['caption']}' class='img-responsive' /></a>";
+						echo "<a href='{$photo_large_src[0]}' target='_blank' class='lightbox-link gallery-link' data-sizes='{$photo_large_src[1]}x{$photo_large_src[2]}'><img src='{$photo_src[0]}' alt='{$photo['caption']}' class='img-responsive' /></a>";
 					}
 					?>
 					</div>

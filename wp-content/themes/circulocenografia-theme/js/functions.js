@@ -152,29 +152,29 @@ jQuery(document).ready(function($){
 	 * PHOTOSWIPE
 	 * 
 	 */
-	if( $('#single-portfolio-gallery-owl-carousel').length ){
+	if( $('.lightbox-link').length ){
 		var pswpElement = document.querySelectorAll('.pswp')[0];
 		
 		// build items array
 		var items = [];
 		
-		$('#single-portfolio-gallery-owl-carousel .owl-item').each(function(){
-			var link = $(this).find('.gallery-link');
+		$('.lightbox-link').each(function(){
+			var link = $(this);
 			var sizes = link.attr('data-sizes').split('x');
 			var photo = {
 				src : link.attr('href'),
 				w : sizes[0],
 				h : sizes[1],
-				title : $(this).find('.gallery-link img').attr('alt')
+				title : $(this).find('img').attr('alt')
 			}
 			items.push(photo);
 		});
 		//console.log(items);
 		
-		$('#single-portfolio-gallery-owl-carousel .owl-item a.gallery-link').on('click', function(evt){
+		$('.lightbox-link').on('click', function(evt){
 			evt.preventDefault();
-			var elem_index = $(this).closest('.owl-item').index();
-		
+			
+			var elem_index = $('.single-portfolio-content .lightbox-link').index($(this));
 			var options = { index : elem_index, loop : false }
 			
 			// Initializes and opens PhotoSwipe
