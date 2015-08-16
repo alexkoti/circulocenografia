@@ -257,6 +257,35 @@ html.active, body.active {
 
 
 /**
+ * HOME
+ * 
+ */
+#home-carousel {
+	position:relative;
+}
+#home-carousel .owl-controls {
+	
+}
+#home-carousel .owl-controls .owl-buttons div {
+	position:absolute;
+	top:30%;
+	width:80px;
+	height:80px;
+	font-size:40px;
+	line-height:65px;
+	border-radius:0;
+	background:rgba(237, 27, 36, 0.2);
+}
+#home-carousel .owl-controls .owl-buttons div.owl-prev {
+	left:20px;
+}
+#home-carousel .owl-controls .owl-buttons div.owl-next {
+	right:20px;
+}
+
+
+
+/**
  * PORTFOLIO
  * 
  */

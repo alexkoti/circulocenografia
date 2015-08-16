@@ -58,6 +58,8 @@
 								'terms' => $cat->term_id,
 							),
 						),
+						'orderby' => 'menu_order',
+						'order' => 'ASC',
 					);
 					$items = new WP_Query($args);
 					if( $items->posts ){

@@ -121,12 +121,30 @@ jQuery(document).ready(function($){
 	
 	
 	/**
-	 * OWL CAROUSEL
+	 * OWL CAROUSEL: PORTFOLIO
 	 * 
 	 */
 	$('#single-portfolio-gallery-owl-carousel').owlCarousel({
 		itemsMobile : [479, 2],
 		itemsTablet : [768, 3]
+	});
+	
+	
+	/**
+	 * OWL CAROUSEL: HOME
+	 * 
+	 */
+	$("#home-carousel").owlCarousel({
+		autoPlay        : 4000,
+		stopOnHover     : true,
+		navigation      : true,
+		paginationSpeed : 1000,
+		goToFirstSpeed  : 2000,
+		singleItem      : true,
+		autoHeight      : true,
+		transitionStyle : 'fade',
+		pagination      : false,
+		navigationText  : ['&lsaquo;', '&rsaquo;']
 	});
 	
 	
@@ -164,49 +182,6 @@ jQuery(document).ready(function($){
 			gallery.init(1);
 		});
 	}
-	
-	
-	
-	/**
-	 * VALIDATION
-	 * Ações para validação js de comentários
-	 * 
-	 * 
-	 * 
-	 */
-	$("#commentform").validate({
-		rules: {
-			// name_do_input: 'método de validação para aplicar, separado por espaços'
-			comment: 'defaultInvalid'
-		},
-		messages: {
-			// name_do_input: 'Mensagem'
-			comment: 'Digite uma mensagem',
-			author: 'Este campo é obrigatório',
-			email: 'Digite um endereço de e-mail válido'
-		},
-		errorPlacement: function(label, element) {
-			// label - elemento <label> gerado pelo validator
-			// element - input validado
-			// pegar o id do elmento e assim desconbrir o <label> como 'for' correspondente
-			label.insertAfter( $('label[for=' + element.attr('id') + ']') );
-		}
-	});
-	//remover label de error ao focar os inputs
-	$('.form_element input, .form_element textarea').hover(function(){
-		$(this).siblings('.error').fadeOut();
-	});
-	// método personalizado de validação - 'defaultInvalid'
-	jQuery.validator.addMethod('defaultInvalid', function(value, element) {
-		switch (element.value) {
-			case 'Digite sua mensagem aqui':
-				if (element.name == 'comment')
-				return false;
-				break;
-			default: return true; 
-				break;
-		}
-	});
 	
 	
 	
