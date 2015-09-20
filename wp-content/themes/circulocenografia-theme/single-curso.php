@@ -12,7 +12,17 @@
 				custom_content_nav( 'nav_above' );
 				while (have_posts()){
 					the_post();
-					get_template_part( 'content', 'single' );
+			?>
+			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
+				<?php single_post_nav('nav-above'); ?>
+				<header class="entry_header clearfix">
+					<h1><?php the_title(); ?></h1>
+				</header>
+				<div class="entry_content clearfix">
+					<?php the_content(); ?>
+				</div>
+			</article>
+			<?php
 				}
 			}
 			?>

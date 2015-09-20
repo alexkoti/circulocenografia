@@ -79,7 +79,7 @@
 					<li id="cursos-submenu">
 						<?php formatted_page_link(array('page_name' => 'cursos')); ?>
 						<?php
-						if( is_page(array('cursos', 'cursos-anteriores')) or is_singular('curso') ){
+						if( is_page(array('cursos', 'cursos-anteriores')) or is_singular('curso') or is_post_type_archive('curso') ){
 							echo '<ul>';
 							formatted_page_link(array('page_name' => 'cursos-anteriores', 'list' => true));
 							echo '</ul>';

@@ -171,7 +171,6 @@ function my_meta_boxes(){
 		)
 	);
 	
-	
 	$meta_boxes[] = array(
 		'id' => 'post_special_image_box', 
 		'title' => 'Imagem do Post', 
@@ -189,6 +188,24 @@ function my_meta_boxes(){
 					'layout' => 'compact',
 					'width' => 264,
 				),
+			),
+		)
+	);
+	
+	$meta_boxes[] = array(
+		'id' => 'curso_old_box', 
+		'title' => 'Curso anterior', 
+		'post_type' => array('curso'), 
+		'context' => 'side', 
+		'priority' => 'default',
+		'desc' => 'Exibir este curso em "Cursos Anteriores"',
+		//'help' => '',
+		'itens' => array(
+			array(
+				'name' => 'curso_anterior',
+				'type' => 'checkbox',
+				'input_helper' => 'Curso anterior',
+				'layout' => 'block',
 			),
 		)
 	);
