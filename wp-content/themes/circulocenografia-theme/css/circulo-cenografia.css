@@ -1010,8 +1010,19 @@ html.active, body.active {
 	}
 }
 
-
-
+/**
+ * Nós
+ * 
+ */
+#post-11 .entry_content img.size-medium {
+    border-radius: 50%;
+    max-width: 227px;
+}
+@media (max-width: 600px) {
+    #post-11 .entry_content img.size-medium {
+        max-width: 50%;
+    }
+}
 
 
 

@@ -52,7 +52,7 @@
 							if( !empty($desc['image_extra']) ){
 								$img_extra_src = wp_get_attachment_image_src($desc['image_extra'], 'medium');
 								$img_extra_large_src = wp_get_attachment_image_src($desc['image_extra'], 'large');
-								echo "<div class='item-image extra-image'><a href='{$img_large_src[0]}' target='_blank' class='lightbox-link' data-sizes='{$img_large_src[1]}x{$img_large_src[2]}'><img src='{$img_src[0]}' alt='' class='image-half image-half-left' /></a><a href='{$img_extra_large_src}' target='_blank' class='gallery-link' data-sizes='{$img_extra_large_src[1]}x{$img_extra_large_src[2]}'><img src='{$img_extra_src[0]}' alt='' class='image-half image-half-right' /></a></div>";
+								echo "<div class='item-image extra-image'><a href='{$img_large_src[0]}' target='_blank' class='lightbox-link' data-sizes='{$img_large_src[1]}x{$img_large_src[2]}'><img src='{$img_src[0]}' alt='' class='image-half image-half-left' /></a><a href='{$img_extra_large_src[0]}' target='_blank' class='lightbox-link' data-sizes='{$img_extra_large_src[1]}x{$img_extra_large_src[2]}'><img src='{$img_extra_src[0]}' alt='' class='image-half image-half-right' /></a></div>";
 							}
 							elseif( $desc['align'] == 'full' ){
 								echo "<div class='item-image'><a href='{$img_large_src[0]}' target='_blank' class='lightbox-link' data-sizes='{$img_large_src[1]}x{$img_large_src[2]}'><img src='{$img_src[0]}' alt='' class='image-{$desc['align']}' /></a></div>";

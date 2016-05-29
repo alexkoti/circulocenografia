@@ -29,16 +29,16 @@ get_header(); ?>
 					<div class="owl-carousel clearfix" id="home-carousel">
 						<?php
 						$i = 0;
-						foreach( $slider as $s ){
+						foreach( $slider as $slide ){
 							$class = ($i == 0) ? 'item clearfix active' : 'item clearfix';
-							$video = isset($s['video']) ? $s['video'] : false;
-							$image = isset($s['image']) ? wp_get_attachment_image_src( $s['image'], $sizes[$size]) : array('');
+							$video = isset($slide['video']) ? $slide['video'] : false;
+							$image = isset($slide['image']) ? wp_get_attachment_image_src( $slide['image'], 'column_full') : array('');
 						?>
-						<div id="<?php echo "{$carousel_name}_item_{$i}"; ?>" class="<?php echo $class; ?>">
+						<div id="<?php echo "item_{$i}"; ?>" class="<?php echo $class; ?>">
 							<?php
 							if( $video === false ){
-								if( !empty($s['link']) ){
-									$link = apply_filters('the_permalink', $s['link']);
+								if( !empty($slide['link']) ){
+									$link = apply_filters('the_permalink', $slide['link']);
 									echo "<a href='{$link}'><img alt='' src='{$image[0]}' class='img-responsive'></a>";
 								}
 								else{
@@ -48,9 +48,9 @@ get_header(); ?>
 							else{
 								echo apply_filters('the_content', $video);
 							}
-							if( !empty($s['text']) ){
+							if( !empty($slide['text']) ){
 								echo '<div class="titulo_menu_image">';
-								echo apply_filters('the_content', $s['text']);
+								echo apply_filters('the_content', $slide['text']);
 								echo '</div>';
 							}
 							?>

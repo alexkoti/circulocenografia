@@ -8,8 +8,8 @@
 					<?php formatted_page_link(array('page_name' => 'nos', 'list' => true)); ?>
 					<?php
 					if( is_post_type_archive('portfolio') or is_singular('portfolio') ){
-						$portfolio_item = get_queried_object(); //pre($portfolio_item);
-						$portfolio_item_cats = wp_get_object_terms($portfolio_item->ID, 'portfolio_category'); //pre($portfolio_item_cats);
+						$portfolio_item = get_queried_object(); //pre($portfolio_item); die();
+						$portfolio_item_cats = ( isset($portfolio_item->ID) ) ? wp_get_object_terms($portfolio_item->ID, 'portfolio_category') : false; //pre($portfolio_item_cats);
 					?>
 					<li id="portfolio-submenu">
 						<?php
@@ -42,19 +42,21 @@
 								if( !empty($cat['posts']) ){
 									$class = 'portfolio-category-items';
 									// primeiro verificar a categoria do queried object, no caso de single
-									foreach( $portfolio_item_cats as $c ){
-										if( $c->term_id == $cat['term_id'] ){
-											$class = 'portfolio-category-items active';
-											continue;
-										}
-									}
+                                    if( $portfolio_item_cats !== false ){
+                                        foreach( $portfolio_item_cats as $c ){
+                                            if( $c->term_id == $cat['term_id'] ){
+                                                $class = 'portfolio-category-items active';
+                                                continue;
+                                            }
+                                        }
+                                    }
 									// verificar active category por url
 									if( $category_active == $cat['slug'] ){
 										$class = 'portfolio-category-items active';
 									}
 									echo "<ul id='portfolio-category-items-{$cat['term_id']}' class='{$class}' data-active='0'>";
 									foreach( $cat['posts'] as $post ){
-										if($portfolio_item->ID == $post['ID']){
+										if(isset($portfolio_item->ID) and $portfolio_item->ID == $post['ID']){
 											echo "<li id='portfolio-category-item-{$post['ID']}' class='portfolio-category-item'><span class='active'>{$post['title']}</span></li>";
 										}
 										else{

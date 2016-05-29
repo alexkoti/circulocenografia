@@ -18,7 +18,7 @@
  * 
  */
 function circle_get_portfolio_category_transient(){
-	if( false === ( $portfolio_menu = get_transient('portfolio_menu') ) ){
+	if( false === ( $portfolio_menu = get_transient('portfolio_menu1') ) ){
 		// definir o array a ser salvo, com data atual
 		date_default_timezone_set(get_option('timezone_string'));
 		$portfolio_menu = array('creation' => date('Y-m-d-H-i-s'));
@@ -29,7 +29,7 @@ function circle_get_portfolio_category_transient(){
 		
 		// buscar posts de cada termo
 		foreach( $ports as $cat ){
-			$portfolio_menu[posts][$cat->term_id] = array(
+			$portfolio_menu['posts'][$cat->term_id] = array(
 				'term_id' => $cat->term_id,
 				'name' => $cat->name,
 				'slug' => $cat->slug,
@@ -55,7 +55,7 @@ function circle_get_portfolio_category_transient(){
 						$thumb_src = wp_get_attachment_image_src($thumb, 'post-thumbnail');
 						$img = "<img src='{$thumb_src[0]}' alt='' class='img-responsive' />";
 					}
-					$portfolio_menu[posts][$cat->term_id]['posts'][] = array(
+					$portfolio_menu['posts'][$cat->term_id]['posts'][] = array(
 						'ID' => $post->ID,
 						'title' => get_the_title($post->ID),
 						'link' => get_permalink($post->ID),
@@ -66,7 +66,7 @@ function circle_get_portfolio_category_transient(){
 			}
 			wp_reset_query();
 		}
-		set_transient( 'portfolio_menu', $portfolio_menu, 1 * DAY_IN_SECONDS );
+		//set_transient( 'portfolio_menu', $portfolio_menu, 1 * DAY_IN_SECONDS );
 	}
 	return $portfolio_menu;
 }
