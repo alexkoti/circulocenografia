@@ -17,9 +17,10 @@
  * 
  */
 if( !is_admin() ){
-	add_action( 'init', 'add_frontend_scripts' );  // adicionar scripts ao header
-	add_action( 'wp_head', 'work_opengraph', 99 ); // iniciar o opengraph, caso esteja ativado
-	remove_action('wp_head', 'wp_generator');      // remover a assinatura de versão do wordpress
+	add_action( 'wp_print_styles', 'add_frontend_styles' );   // adicionar styles ao header
+	add_action( 'init', 'add_frontend_scripts' );             // adicionar scripts ao header
+	add_action( 'wp_head', 'work_opengraph', 99 );            // iniciar o opengraph, caso esteja ativado
+	remove_action('wp_head', 'wp_generator');                 // remover a assinatura de versão do wordpress
 }
 
 function work_opengraph(){
@@ -91,38 +92,112 @@ function circulo_custom_colors(){
  * 
  * 
  */
+function add_frontend_styles(){
+	$css = new BorosCss();
+	$css->vendor('bootstrap.min', 'bootstrap/css');
+	$css->add('wp');
+	//$css->add('photoswipe');
+	//$css->add('default-skin', 'photoswipe-default-skin');
+	//$css->add('owl.carousel');
+	//$css->add('owl.theme');
+	//$css->add('owl.transitions');
+	$css->add('circulo-cenografia');
+	$css->vendor('owl.carousel', 'owl.carousel/owl-carousel');
+	$css->vendor('owl.theme', 'owl.carousel/owl-carousel');
+	$css->vendor('owl.transitions', 'owl.carousel/owl-carousel');
+    $css->vendor('photoswipe', 'PhotoSwipe/dist');
+    $css->vendor('default-skin', 'PhotoSwipe/dist/default-skin');
+	
+	if( defined('LOCALHOST') and LOCALHOST == true ){
+		$css->add('responsive_debug');
+	}
+	
+	/* MODELO absolute / google fonts */
+	$args = array(
+		'name' => 'font-raleway',
+		'src' => 'http://fonts.googleapis.com/css?family=Raleway:500,700,400',
+		'parent' => false,
+		'version' => '1',
+		'media' => 'screen',
+	);
+	$css->abs($args);
+	/**/
+	
+	/** MODELOS
+	//simples, sem dependencia
+	$css->add('forms');
+	
+	//encadeamento de 2 styles child
+	$css->add('lightbox', 'lightbox')->child('lights', 'lightbox/themes')->child('shadows', 'lightbox/themes')->media('all');
+	
+	//subpasta, media print, alternate stylesheet
+	$css->add('animations', 'anims')->media('print')->alt();
+	
+	//ies, encadeando child ie6 condicional
+	$css->add('ies', 'ie', 'all')->child('ie6', 'ie', 'handheld')->cond('lte IE 8');
+	
+	//child de ies, media all, condicional
+	$css->child('ie7', 'ie', 'all', 'ies')->cond('lte 8');
+	
+	//debug
+	global $wp_styles;pre($wp_styles);
+	/**/
+}
+
+
+
+/**
+ * ==================================================
+ * JAVASCRIPTS ======================================
+ * ==================================================
+ * Todos os scripts serão adicionados ao wp_footer() por padrão
+ * 
+ */
 function add_frontend_scripts(){
-    $css = new BorosCss();
-    $css->vendor('bootstrap.min', 'bootstrap/css');
-	$css->vendor('photoswipe', 'PhotoSwipe/dist');
-	$css->vendor('default-skin', 'PhotoSwipe/dist/default-skin');
-    $css->vendor('owl.carousel', 'owl.carousel/assets');
-    $css->vendor('owl.theme', 'owl.carousel/assets');
-    $css->vendor('owl.transitions', 'owl.carousel/assets');
-    $css->add('wp');
-    $css->add('circulo-cenografia');
+	$js = new BorosJs();
+	$js->jquery('jquery.validate.min', 'libs');
+	//$js->jquery('bootstrap.min', 'libs');
+	//$js->jquery('photoswipe.min', 'libs');
+	//$js->jquery('photoswipe-ui-default.min', 'libs');
+	//$js->jquery('owl.carousel.min', 'libs');
+	$js->jquery('jquery.history', 'libs');
     
-    if( defined('LOCALHOST') and LOCALHOST == true ){
-        $css->add('responsive_debug');
-    }
     
-    /* MODELO absolute / google fonts */
-    $args = array(
-        'name' => 'font-raleway',
-        'src' => 'http://fonts.googleapis.com/css?family=Raleway:500,700,400',
-        'parent' => false,
-        'version' => '1',
-        'media' => 'screen',
-    );
-    $css->abs($args);
-    
-    $js = new BorosJs();
 	$js->vendor('bootstrap.min', 'bootstrap/js');
-	$js->vendor('photoswipe', 'PhotoSwipe/dist');
-	$js->vendor('photoswipe-ui-default', 'PhotoSwipe/dist');
-    $js->vendor('owl.carousel.min', 'owl.carousel');
-    $js->vendor('jquery.history', 'jquery.history');
-    $js->jquery('functions');
+    $js->vendor('photoswipe', 'PhotoSwipe/dist');
+    $js->vendor('photoswipe-ui-default', 'PhotoSwipe/dist');
+    $js->vendor('owl.carousel.min', 'owl.carousel/owl-carousel');
+	$js->jquery('functions');
+	//$js->add('modernizr', 'libs', false, false);
+	//$js->add('html5', 'libs', false, false);
+	
+	/**
+	$js->jquery('myjqueryfuncs');                      //jquery novo
+	$js->jquery('jquery-ui-core');                     //jquery já registrado
+	$js->add('effects');                               //simples
+	$js->add('lightbox', 'lightbox');                  //simples subpasta
+	$js->add('thickbox')->child('extendthick');        //encadeado, simples
+	$js->add('thickbox')->child('extendthick', 'ext'); //encadeado, subpasta
+	global $wp_scripts;pre($wp_scripts); //debug
+	/**/
+	
+	// enqueues comuns/absolutos
+	/**
+	wp_enqueue_script(
+		$handle = 'twitter_api', 
+		$src = 'http://platform.twitter.com/widgets.js', 
+		$deps = false, 
+		$ver = null, 
+		$in_footer = true
+	);
+	wp_enqueue_script(
+		$handle = 'facebook_api', 
+		$src = 'http://connect.facebook.net/pt_BR/all.js#xfbml=1', 
+		$deps = false, 
+		$ver = null, 
+		$in_footer = true
+	);
+	/**/
 }
 
 
