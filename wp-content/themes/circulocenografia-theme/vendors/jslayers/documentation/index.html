@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>jLayers Documentation</title> 
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="css/blueprint/plugins/fancy-type/screen.css" media="screen, projection" />
+	<link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+<!--[if lt IE 8]>
+    <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"/>
+    <![endif]-->
+	<link href="prettify/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="prettify/prettify.js"></script> 
+<style type="text/css">
+	/* my style */
+	body
+	{
+		background-color: #f5f5f5;
+		color: #333;
+		font-size: 15px;
+	}
+	
+	#wrapper
+	{
+		padding: 30px;
+		margin-top: 30px;
+		margin-bottom: 30px;
+		background-color: #fff;
+	}
+	
+	#content ul
+	{
+		padding-top: 10px;
+		list-style: url('css/blueprint/plugins/buttons/icons/tick.png') inside;
+	}
+	
+	#prop td
+	{
+		background-color: #fff;
+		border-bottom: 1px dotted #ddd;
+	}
+	
+	#prop td:nth-child(3)
+	{
+		font-style: italic;
+		color: #3090C7;
+	}
+	
+	#prop td:nth-child(2)
+	{
+		color: #444;
+		font-size: 13px;
+	}
+	
+	#prop th { background-color: #f5f5f5; }
+	
+	#prop .header th
+	{
+		color: #fff;
+		background-color: #999;
+	}
+	
+	.center { text-align: center; }
+	
+	.code
+	{
+		padding: 5px;
+		background-color: #F0F3F5;
+		font-size: 12px;
+		line-height: 15px;
+	}
+	
+	.text { padding: 3px; }
+	
+	a.goto
+	{
+		font-weight: bold;
+		color: #999;
+		text-decoration: none;
+	}
+	
+	a.goto:hover { color: #333; }
+	
+	.container a { text-decoration: none; }
+
+	i{ color: #32688C; }
+    </style> 
+</head>
+<body onload="prettyPrint();">
+<div id="wrapper" class="container">
+<!--caption -->
+	<div class="span-24 append-bottom">
+		<a name="top"></a><h1 class="center">jLayers</h1> 
+		<p class="center" style="margin-top: -15px">
+			<img src="css/shadow.png" alt='' /> 
+		</p>
+		<h4 class="alt center">"Configuration&Installation Guide"</h4> 
+	</div>
+<!-- header -->
+	<div id="content" class="span-6 border">
+		<h2 class="alt bottom">Table of content:</h2> 
+		<ul>
+			<li>
+				<a href="#section1">Installation</a> 
+			</li>
+			<li>
+				<a href="#section2">Configuration</a> 
+			</li>
+			<li>
+				<a href="#section3">Parameters</a> 
+			</li>
+		</ul>
+	</div>
+	<div class="span-12 prepend-1 prepend-top last">
+		<p class="quiet">
+			Thank you for purchasing jLayers. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a href="http://codecanyon.net/user/flGravity">here</a>. 
+			<br />
+			Thanks so much! 
+		</p>
+	</div>
+	<hr />
+	<p class="right alt" style="font-size: 13px;">
+		Created: 14/06/11 &copy; flGravity 
+	</p>
+<!--installation-->
+	<div class="span-24 prepend-top">
+		<a name="section1"></a><h2 class="center alt">Installation</h2> 
+		<p class="text">
+			First of all upload js/ and css/ folders to your server.
+Then include jLayers javascript file as well as css file in head section of your page: 
+		</p>
+<pre class="prettyprint code">
+&lt;link rel="stylesheet" type="text/css" href="css/jlayers.css" /&gt;
+&lt;script type="text/javascript" src="js/jlayers.js"&gt;&lt;/script&gt;</pre> 
+		<p>
+		Next add &lt;script&gt; section that calls jLayers() function once page is loaded.
+		jLayers() function accepts 2 arguments, first argument is DOM element or id of div container;
+		 second argument is configuration for jLayers: 
+		</p>
+<pre class="prettyprint code">
+&lt;script type="text/javascript"&gt;
+        window.onload=function(){
+          jLayers('layer1', {
+                offsetX:[-80,200,-50,40],
+                offsetY:[30,-100,50,-30],
+                alpha: [1,0.8,0.9,0.3],
+                easingSpeed: 6,
+          });
+        }
+&lt;/script&gt;</pre> 
+		<p>And finally add jLayers container to the &lt;body&gt;:</p>
+<pre class="prettyprint code">
+&lt;div id="layer1" class="jlayers"&gt;
+  &lt;div id="red" style="top:15%; left:50%"&gt;&lt;/div&gt;
+  &lt;div id="green" style="top:30%; left:30%"&gt;&lt;/div&gt;
+  &lt;div id="blue" style="top:50%; left:20%"&gt;&lt;/div&gt;
+  &lt;div id="yellow" style="top:20%; left:40%"&gt;&lt;/div&gt;
+  ...
+&lt;/div&gt;
+</pre>
+<p>Please note that instead of &lt;div&gt; elements inside jLayers container you may have any other element,
+like image, paragraph or even code to embed video. These elements will be wrapper by plugin into 
+&lt;div class="jlayers-layer"&gt;&lt;/div&gt; and will have class 'jlayers-content' assigned.
+ </p>
+</div>
+
+<!--configuration-->
+<div class="span-24 prepend-top">
+    <a name="section2"></a><h2 class="center alt">Configuration</h2> 
+    <h3 class="alt prepend-top">jLayer container position and size?</h3>
+     <p>jLayers container by default has 'fixed' position and has height and width set to 100%.
+	This will work perfectly if you need to create full-page animated background for your site.
+	But if you are going to create slider then is better to use 'absolute' position.
+	There is 2 ways how to set it:<br/>
+	<ol>
+	 <li> using css:
+	<pre class="code prettyprint">#layer1{
+  position: 'absolute';
+}</pre>
+	</li>
+	<li>
+	using cssPosition option:
+<pre class="prettyprint code">jLayers('layer1', {cssPosition: 'absolute'});</pre>
+	</li>
+	</ol>
+	</p>
+	Besides cssPosition option jLayers has cssTop and cssLeft properties that can be used to
+	set top/left position of container.<br/><p></p>
+    <p>jLayers container by default has width and height set to 100%, but if you need to set
+	fixed size for container you need to do this using css:
+  <pre class="prettyprint code">
+#layer1{
+  width: 700px;
+  height: 100px;
+}</pre>
+</p>
+    
+    <h3 class="alt prepend-top">How to position elements in layers?</h3>
+	<p>jLayers wraps every element inside jLayers container in
+	 &lt;div class="jlayers-layer"&gt;&lt;/div&gt; and sets element position to 'absolute'. 
+	So you can use top,right,bottom,left properties to position elements inside layers.
+	For example if we have image and it needs to be positioned 30% from left and 30% from top
+	within its containing layer then you can do this with: 
+	<pre class="code prettyprint">
+&lt;div id="layer1" class="jlayers"&gt;
+  &lt;img src="images/img1.jpg" alt="" style="top:30%; left:30%;" /&gt;
+&lt;/div&gt;</pre>
+	</p>
+	
+    <h3 class="alt prepend-top">How to change jLayer configuration at runtime?</h3>
+	When you call jLayers function it returns reference to settings object, 
+	thus giving you ability to change jLayers configuration at runtime. In example below 
+	we have a scroller that expands to the full page width, and if browser window is resized 
+	we need to calculate document width again to find a scrolling amount. 
+	To do this we use following code:
+	<pre class="prettyprint code">
+var s =	jLayers('slider',{offsetCenter:'left',easingSpeed:3});
+window.onresize = function(){
+	s.offsetX = jLayers.documentSize().width-jLayers.layerSize('content').width;
+};
+//set initial offsetX
+window.onresize();</pre>
+    More about jLayers.documentSize() and jLayers.layerSize() functions read in next section.
+    <h3 class="alt prepend-top">Functions for retrieving document size and element size</h3>
+    Along with jLayers() function itself there are two handy subfunctions - jLayers.documentSize()
+	and jLayers.layerSize():
+	<p>
+	<i>jLayers.documentSize()</i> cat be used to get browser's viewport size in pixels. 
+	Function returns object with 'width' and 'height' properties<br/>
+	<i>jLayers.layerSize(id)</i> can be used to get width and height (including padding and border)
+	 for any element by its id. Function returns object with 'width' and 'height' 
+	properties and accepts one argument that can be either DOM element itself or element's id.
+        </p>
+</div>
+
+<!-- parameters -->
+	<div class="span-24 prepend-top">
+		<a name="section3"></a><h2 class="center alt">Parameters</h2> 
+		<p class="text">
+	In table below there is 11 configuration options that you can use with this plugin. 
+        They needs to be passed as second argument to jLayers() as JavaScript object. 
+	Please note that all options have default values, that will be used, when option with given name is ommited in configuration that is passed to jLayers().
+		</p>
+<pre class="prettyprint code">
+jLayers('layer1', {
+                offsetX:[-80,200,-50,40],
+                offsetY:[30,-100,50,-30],
+                alpha: [1,0.8,0.9,0.3],
+                easingSpeed: 6,
+		catchGlobalMove: true
+          });</pre> 
+		<hr class="space" />
+		<table id="prop">
+			<tr class="header">
+				<th>
+					Property 
+				</th>
+				<th>
+					Description 
+				</th>
+				<th>
+					Default 
+				</th>
+			</tr>
+			<tr>
+				<td>
+					alpha 
+				</td>
+				<td>
+				 number or array of numbers (0.5 | [0.2,0.3,0.4]) that set transparency for every layer in container in the order from the first to the last element. If the number is given, it will be applied to all layers. Number(s) must be in range from 0 to 1, where 0 means fully transparent layer. If there is more layers than numbers in array, last number in array will be used for all following layers.
+				</td>
+				<td>
+					1 
+				</td>
+			</tr>
+			<tr>
+			<td>catchGlobalMove</td>
+			<td>boolean value (true | false) that turns on detecting mouse movement in entire document not only in area if jLayer container. This valus should be set to true if jLayers is used to build site background.</td>
+			<td>false</td>
+			</tr>
+			<tr>
+				<td>
+					cssPosition 
+				</td>
+				<td>
+					string ('fixed' | 'relative' | 'absolute') that sets jLayers container position. By default jLayers container has 'fixed' position and is set through jlayers.css
+				</td>
+				<td>
+					undefined
+				</td>
+			</tr>
+                        <tr>
+                                <td>
+                                        cssTop
+                                </td>
+                                <td>
+                                        string ('40%' | '500px') that sets jLayers container's top position and is equivalent to CSS 'top' property.
+                                </td>
+                                <td>
+                                        undefined
+                                </td>
+                        </tr>
+                        <tr>    
+                                <td>
+                                        cssLeft
+                                </td>   
+                                <td>
+                                        string ('40%' | '500px') that sets jLayers container's left position and is equivalent to CSS 'left' property.
+                                </td>
+                                <td>
+                                        undefined
+                                </td> 
+                        </tr>   
+			<tr>
+				<td>
+					offsetX 
+				</td>
+				<td>
+				number or array of numbers (200 | [30,-50,100,10]) that set amount of horizontal offset for every layer in container and is measured in pixels. The offset can be either positive or negative, where positive number means right shift, negative - left shift. When the number is set it will be applied to all layers. If array is used, the numbers from array will be applied to layers in the order from the first to the last layer in container. If there is more layers than elements in array - last number from array will be used to set offset for all following layers.
+				</td>
+				<td>
+					0 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					offsetY
+				</td>
+				<td>
+				number or array of numbers (200 | [30,-50,100,10]) that set amount of vertical offset for every layer in container and is measured in pixels. The offset can be either positive or negative, where positive means shift to the bottom, negative - shift to top. When the number is set it will be applied to all layers. If array is used, the numbers from array will be applied to layers in the order from the first to the last layer in container. If there is more layers than elements in array - last number in array will be used to set offset for all following layers.
+				</td>
+				<td>
+					0 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					offsetCenter 
+				</td>
+				<td>
+				string ('left center' | 'top right') that combines 'left,right,center' for horizontal position and 'top,center,bottom' for vertical position devided by space, and represents the start point for measuring amount of mouse offset. By default mouse offset is measured from center of browser window. Where the center point means 0,0 offset and while the mouse moves to the borders layers offsets becomes equal to values in offsetY, offsetX arrays. The word 'center' can be ommited in offsetCenter parameter; in this case if you assign 'left' to offsetCenter it will be equal to 'left center'. 
+				</td>
+				<td>
+					'center'
+				</td>
+			</tr>
+			<tr>
+				<td>
+					easing 
+				</td>
+				<td>
+				boolean (true | false) that enables easing for layers
+				</td>
+				<td>
+				 	true
+				</td>
+			</tr>
+			<tr>
+				<td>
+					easingRate 
+				</td>
+				<td>
+					 number (50), the interval in milliseconds that is used to generate sequence of offsets while using easing. The smaller the value the quicker in time layers will get their final offsets
+				</td>
+				<td>
+					50
+				</td>
+			</tr>
+			<tr>
+				<td>
+					easingSpeed 
+				</td>
+				<td>
+					 number (>1), that works as divider for easing. That the lower the number the faster the easing. Value 1 will remove easing at all.
+				</td>
+				<td>
+					3 
+				</td>
+			</tr>
+		</table>
+	</div>
+	<hr class="space" />
+	<div class="span-24">
+		<a class="goto" href="#top">TOP</a><img src="css/blueprint/plugins/link-icons/icons/external.png" alt='' /> 
+	</div>
+</div>
+</body>
+</html>
