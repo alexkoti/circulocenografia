@@ -17,7 +17,7 @@
  * 
  */
 if( !is_admin() ){
-	add_action( 'wp_print_styles', 'add_frontend_styles' );   // adicionar styles ao header
+	add_action( 'wp_enqueue_scripts', 'add_frontend_styles' );   // adicionar styles ao header
 	add_action( 'init', 'add_frontend_scripts' );             // adicionar scripts ao header
 	add_action( 'wp_head', 'work_opengraph', 99 );            // iniciar o opengraph, caso esteja ativado
 	remove_action('wp_head', 'wp_generator');                 // remover a assinatura de versão do wordpress
@@ -101,12 +101,12 @@ function add_frontend_styles(){
 	//$css->add('owl.carousel');
 	//$css->add('owl.theme');
 	//$css->add('owl.transitions');
-	$css->add('circulo-cenografia');
 	$css->vendor('owl.carousel', 'owl.carousel/owl-carousel');
 	$css->vendor('owl.theme', 'owl.carousel/owl-carousel');
 	$css->vendor('owl.transitions', 'owl.carousel/owl-carousel');
     $css->vendor('photoswipe', 'PhotoSwipe/dist');
     $css->vendor('default-skin', 'PhotoSwipe/dist/default-skin');
+	$css->add('circulo-cenografia');
 	
 	if( defined('LOCALHOST') and LOCALHOST == true ){
 		$css->add('responsive_debug');
