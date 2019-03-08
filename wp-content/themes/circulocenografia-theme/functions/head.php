@@ -115,7 +115,7 @@ function add_frontend_styles(){
 	/* MODELO absolute / google fonts */
 	$args = array(
 		'name' => 'font-raleway',
-		'src' => 'http://fonts.googleapis.com/css?family=Raleway:500,700,400',
+		'src' => 'https://fonts.googleapis.com/css?family=Raleway:500,700,400',
 		'parent' => false,
 		'version' => '1',
 		'media' => 'screen',
