@@ -17,7 +17,7 @@
  * 
  */
 if( !is_admin() ){
-	add_action( 'wp_enqueue_scripts', 'add_frontend_styles' );   // adicionar styles ao header
+	add_action( 'wp_enqueue_scripts', 'add_frontend_scripts' );   // adicionar styles ao header
 	add_action( 'init', 'add_frontend_scripts' );             // adicionar scripts ao header
 	add_action( 'wp_head', 'work_opengraph', 99 );            // iniciar o opengraph, caso esteja ativado
 	remove_action('wp_head', 'wp_generator');                 // remover a assinatura de versão do wordpress
@@ -92,8 +92,8 @@ function circulo_custom_colors(){
  * 
  * 
  */
-function add_frontend_styles(){
-	$css = new BorosCss();
+function add_frontend_scripts(){
+	$css = new BorosCss(array('ver' => THEME_VERSION));
 	$css->vendor('bootstrap.min', 'bootstrap/css');
 	$css->add('wp');
 	//$css->add('photoswipe');
@@ -142,19 +142,8 @@ function add_frontend_styles(){
 	//debug
 	global $wp_styles;pre($wp_styles);
 	/**/
-}
-
-
-
-/**
- * ==================================================
- * JAVASCRIPTS ======================================
- * ==================================================
- * Todos os scripts serão adicionados ao wp_footer() por padrão
- * 
- */
-function add_frontend_scripts(){
-	$js = new BorosJs();
+    
+	$js = new BorosJs(array('ver' => THEME_VERSION));
 	$js->jquery('jquery.validate.min', 'libs');
 	//$js->jquery('bootstrap.min', 'libs');
 	//$js->jquery('photoswipe.min', 'libs');

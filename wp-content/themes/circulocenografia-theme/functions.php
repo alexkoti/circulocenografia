@@ -9,6 +9,7 @@
  */
 
 
+define( 'THEME_VERSION',    '2022.08.25.1' );
 define( 'THEME', 			get_template_directory_uri() );
 define( 'CSS', 				THEME . '/css' );
 define( 'CSS_IMG', 			THEME . '/css/img' );
